@@ -2,7 +2,7 @@ from . import *
 from app.irsystem.models.helpers import *
 from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 
-project_name = "World Tour"
+project_name = "Civic Duty"
 net_id = "Abdullah Islam: ai248, Prathamesh Bang: psb77, Milan Shah: mrs282, Ohad Koronyo: ork6 "
 
 @irsystem.route('/', methods=['GET'])
