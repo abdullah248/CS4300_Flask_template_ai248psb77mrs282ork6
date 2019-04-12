@@ -11,11 +11,15 @@
         <form class="form-inline global-search">
             <h1 style="font-size: 55px; font-family:Futura; color: #4285F4">
                 C
-                <font color=#EA4335>S</font>
-                <font color=#FBBC05>4</font>
-                3
-                <font color=#34A853>0</font>
-                <font color=#EA4335>0</font>
+                <font color=#EA4335>I</font>
+                <font color=#FBBC05>V</font>
+                I
+                <font color=#34A853>C</font>
+                <font color=#34A853> </font>
+                <font color=#EA4335>D</font>
+                U
+                <font color=#34A853>T</font>
+                <font color=#EA4335>Y</font>
             </h1>
 
             <br><br>
@@ -30,7 +34,16 @@
             <h1>{{output_message}}</h1>
             {% for d in data %}
                 <br>
-                <p>{{d}}</p>
+                <div class="basic_info">
+                    <p class="id">{{d.idx}}</p>
+                    <img src={{d.pic}} alt={{d.name}} class="profile_image">
+                    <figcaption class="name">{{d.name}}</figcaption>
+                    <p class="arrow">-></p>
+                    <br>
+                    <div class = party>
+                        <p>{{d.party}}</p>
+                    </div>
+                </div>
             {% endfor %}
         {% endif %}
         </form>

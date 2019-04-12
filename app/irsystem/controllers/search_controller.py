@@ -12,6 +12,7 @@ def search():
 		data = []
 		output_message = ''
 	else:
+		view = {"Abortion":1,"Taxes":0}
+		data = [{"idx":1,"pic":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/440px-Donald_Trump_official_portrait.jpg","name":"Donald Trump","party":"Republican","views":view},{"idx":2,"pic":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/440px-Donald_Trump_official_portrait.jpg","name":"Donald Trump","party":"Republican","views":view}]
 		output_message = "Your search: " + query
-		data = range(5)
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=data)
