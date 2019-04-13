@@ -46,7 +46,7 @@ color: #4285F4;
 .basic_info{
 position:relative;
 background-color: #e7e7e7;
-width:200px;
+width:160px;
 height:auto;
 margin-bottom:10px;
 }
@@ -99,6 +99,148 @@ border-radius:10px;
 margin-bottom:5px;
 }
 
+/* Autocomplete */
+/* https://www.w3schools.com/howto/howto_js_autocomplete.asp */
 
+* { box-sizing: border-box; }
+body {
+  font: 16px Arial;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
 
+/* Slider */
+/*https://www.cssportal.com/style-input-range/*/
 
+input[type=range] {
+  height: 32px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 25px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #B0BED1;
+  border-radius: 25px;
+  border: 1px solid #8A8A8A;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #828282;
+  border: 1px solid #000000;
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  background: #2D3136;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -1px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #B0BED1;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 25px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #B0BED1;
+  border-radius: 25px;
+  border: 1px solid #8A8A8A;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #828282;
+  border: 1px solid #8A8A8A;
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  background: #3A3B39;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 25px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #B0BED1;
+  border: 1px solid #8A8A8A;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #B0BED1;
+  border: 1px solid #8A8A8A;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #828282;
+  border: 1px solid #8A8A8A;
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  background: #3A3B39;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #B0BED1;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #B0BED1;
+}
