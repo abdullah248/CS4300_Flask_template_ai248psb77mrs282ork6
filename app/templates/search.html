@@ -2,6 +2,17 @@
     <head>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
+{#        <script type="text/javascript" src="js/script.js"></script>#}
+        <script>
+            function expand(id) {
+                var x = document.getElementById(id);
+                if (x.style.display === "none") {
+                    x.style.display = "table-cell";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>
         {#http://api.jqueryui.com/autocomplete/#}
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.12.4.js"></script>
@@ -27,7 +38,6 @@
             </h1>
 
             <br><br>
-            {#Autocomplete: http://api.jqueryui.com/autocomplete/#}
             <div class="form-group">
                 <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
                 <br>
@@ -44,6 +54,7 @@
                     <span class="range-slider-active-segment"></span>
                     <input type="hidden">
                 </div>
+                {#Autocomplete: http://api.jqueryui.com/autocomplete/#}
 {#                <script>#}
 {#                    $( "#input" ).autocomplete({#}
 {#                        source: [ "Taxes", "Abortion", "Gun Control", "Global Warming", "Drug Control", "Civil Rights"]#}
@@ -57,14 +68,17 @@
             <h1>{{output_message}}</h1>
             {% for d in data %}
                 <br>
-                <div class="basic_info">
-                    <p class="id">{{d.idx}}</p>
-                    <img src={{d.pic}} alt={{d.name}} class="profile_image">
-                    <figcaption class="name">{{d.name}}</figcaption>
-                    <p class="arrow">-></p>
-                    <br>
-                    <div class = party>
-                        <p>{{d.party}}</p>
+                <br>
+                <div class="candidate">
+                    <div class="basic_info">
+                        <p class="id">{{d.idx}}</p>
+                        <img src={{d.pic}} alt={{d.name}} class="profile_image">
+                        <figcaption class="name">{{d.name}}</figcaption>
+                        <button id="{{"button"+d.idx|string}}" type="button" class="arrow" onclick="return expand({{d.idx}})">+</button>
+                        <p class={{d.party}}>{{d.party}}</p>
+                    </div>
+                    <div id={{d.idx}} class="extra_info" style="display: none;">
+                        <p class="view">Build a wall!</p>
                     </div>
                 </div>
             {% endfor %}

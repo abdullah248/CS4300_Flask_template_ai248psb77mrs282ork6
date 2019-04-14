@@ -42,8 +42,15 @@ border: none
 color: #4285F4;
 }
 
+/* Candidate */
+.candidate{
+width:1000px;
+height:auto;
+}
+
 /* Profile */
 .basic_info{
+display: table-cell;
 position:relative;
 background-color: #e7e7e7;
 width:160px;
@@ -88,15 +95,58 @@ display: block;
 .profile_image:hover{
 opacity: .5;
 }
-.party{
-color: #ffffff;
-background-color: #2e6da4;
-width:75px;
+.name{
 text-align: center;
+display: block;
+margin-bottom:5px;
+}
+.Republican{
+text-align: center;
+display: block;
+margin-left: auto;
+margin-right: auto;
+color: #ffffff;
+background-color: #ac2925;
+width:75px;
 font-size: 7.5px;
 height: 10px;
 border-radius:10px;
 margin-bottom:5px;
+}
+.Democrat{
+text-align: center;
+display: block;
+margin-left: auto;
+margin-right: auto;
+color: #ffffff;
+background-color: #2e6da4;
+width:75px;
+font-size: 7.5px;
+height: 10px;
+border-radius:10px;
+margin-bottom:5px;
+}
+.Independent{
+text-align: center;
+display: block;
+margin-left: auto;
+margin-right: auto;
+color: #ffffff;
+background-color: #A454FF;
+width:75px;
+font-size: 7.5px;
+height: 10px;
+border-radius:10px;
+margin-bottom:5px;
+}
+
+/* Extra Info */
+.extra_info{
+/*display: none;*/
+position:relative;
+background-color: #9d9d9d;
+width:830px;
+margin-bottom:10px;
 }
 
 /* Autocomplete */
@@ -156,17 +206,18 @@ input[type=submit] {
 /*https://www.cssportal.com/style-input-range/*/
 
 input[type=range] {
-  height: 32px;
+  height: 10px;
   -webkit-appearance: none;
   margin: 10px 0;
-  width: 100%;
+  width: 300px;
+  background-color:#3d6098;
 }
 input[type=range]:focus {
   outline: none;
 }
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 25px;
+  height: 15px;
   cursor: pointer;
   animate: 0.2s;
   box-shadow: 0px 0px 0px #000000;
@@ -177,8 +228,8 @@ input[type=range]::-webkit-slider-runnable-track {
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px #828282;
   border: 1px solid #000000;
-  height: 25px;
-  width: 25px;
+  height: 15px;
+  width: 15px;
   border-radius: 25px;
   background: #2D3136;
   cursor: pointer;
@@ -186,61 +237,5 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -1px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #B0BED1;
-}
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 25px;
-  cursor: pointer;
-  animate: 0.2s;
-  box-shadow: 0px 0px 0px #000000;
-  background: #B0BED1;
-  border-radius: 25px;
-  border: 1px solid #8A8A8A;
-}
-input[type=range]::-moz-range-thumb {
-  box-shadow: 0px 0px 0px #828282;
-  border: 1px solid #8A8A8A;
-  height: 25px;
-  width: 25px;
-  border-radius: 25px;
-  background: #3A3B39;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 25px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: #B0BED1;
-  border: 1px solid #8A8A8A;
-  border-radius: 50px;
-  box-shadow: 0px 0px 0px #000000;
-}
-input[type=range]::-ms-fill-upper {
-  background: #B0BED1;
-  border: 1px solid #8A8A8A;
-  border-radius: 50px;
-  box-shadow: 0px 0px 0px #000000;
-}
-input[type=range]::-ms-thumb {
-  margin-top: 1px;
-  box-shadow: 0px 0px 0px #828282;
-  border: 1px solid #8A8A8A;
-  height: 25px;
-  width: 25px;
-  border-radius: 25px;
-  background: #3A3B39;
-  cursor: pointer;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #B0BED1;
-}
-input[type=range]:focus::-ms-fill-upper {
   background: #B0BED1;
 }
