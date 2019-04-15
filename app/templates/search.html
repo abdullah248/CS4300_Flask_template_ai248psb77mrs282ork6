@@ -167,14 +167,14 @@
         </form>
         <form class="form-inline global-search">
         {% if data %}
-            <!-- <h1>{{output_message}}</h1> -->
+{#            <!-- <h1>{{output_message}}</h1> -->#}
             {% for d in data %}
                 <br>
                 <br>
                 <div class="candidate">
                     <div class="basic_info">
-                        <p class="id">{{d.idx}}</p>
-                        <img src={{d.pic}} alt={{d.name}} class="profile_image">
+                        <p class="id">{{d.idx+1}}</p>
+                        <img src={{"/static/"+d.pic}} alt={{d.name}} class="profile_image">
                         <figcaption class="name">{{d.name}}</figcaption>
                         <button id="{{"button"+d.idx|string}}" type="button" class="arrow" onclick="return expand({{d.idx}})">+</button>
                         <p class={{d.party}}>{{d.party}}</p>
@@ -183,7 +183,7 @@
                       <div class="summary">
                         <p class="summary_header">Wikipedia Summary</p>
                         <br>
-                        <p class="summary_text">{{d.views.text_match}}</p>
+                        <p class="summary_text">{{d.views.summary}}</p>
                       </div>
                       <br>
                       <table class="views-table" style="width:100%; z-index:1;">
@@ -200,6 +200,12 @@
                               {% endif %}
                               {% if "Favors" in value %}
                                 <td class ="Favors">{{value}}</td>
+                              {% endif %}
+                              {% if "No" in value %}
+                                <td class ="No">{{value}}</td>
+                              {% endif %}
+                              {% if "Neutral" in value %}
+                                <td class ="neutral">{{value}}</td>
                               {% endif %}
                         {% endfor %}
                         </tr>

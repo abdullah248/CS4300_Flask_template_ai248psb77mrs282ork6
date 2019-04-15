@@ -7,13 +7,13 @@ import numpy as np
 import random
 import math
 from collections import defaultdict
-from candidateinfo import *
-from summaryDictCreate import *
+from app.data_retrieval.candidateinfo import *
+from app.data_retrieval.summaryDictCreate import *
 nltk.download('stopwords')
 
 def getInput(input, train_string):
 
-    json_path = 'Candidate_JSONs/'
+    json_path = 'app/data_retrieval/Candidate_JSONs/'
 
     json_files = [json_file for json_file in os.listdir(json_path)]
 
@@ -89,7 +89,7 @@ def getInput(input, train_string):
 
     stopWords = stopwords.words('english')
 
-    il_patho = 'Txt_Files/'
+    il_patho = 'app/data_retrieval/Txt_Files/'
 
     candidate_to_sentence = {}
 
@@ -140,7 +140,7 @@ def getInput(input, train_string):
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
     print(sorted_x)
 
-    createOutput(squaredDistanceList,sorted_x,data,viewDict)
+    return createOutput(squaredDistanceList,sorted_x,data,viewDict)
 
 
 
@@ -158,7 +158,7 @@ def createOutput(firstMetricList,SecondMetricList,data,viewDict):
         cand = bigDict[combinedTupleList[i][0]]
         candSummary = candidate_to_summary[combinedTupleList[i][0]]
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
-        'party':cand['party'],'Views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
+        'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
         'views':viewDict[combinedTupleList[i][0]],'summary':candSummary}})
 
     print()
@@ -167,4 +167,4 @@ def createOutput(firstMetricList,SecondMetricList,data,viewDict):
     print(outputList)
     return outputList
 
-getInput([5, 2, 5, 2, 5, 1, 5, 1, 1, 2, 2, 5, 2, 1, 1, 5, 5, 5, 1, 0],"I love donald trump")
+# getInput([5, 2, 5, 2, 5, 1, 5, 1, 1, 2, 2, 5, 2, 1, 1, 5, 5, 5, 1, 0],"I love donald trump")

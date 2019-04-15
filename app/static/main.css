@@ -113,7 +113,7 @@ height: 10px;
 border-radius:10px;
 margin-bottom:5px;
 }
-.Democrat{
+.Democratic{
 text-align: center;
 display: block;
 margin-left: auto;
@@ -133,6 +133,32 @@ margin-left: auto;
 margin-right: auto;
 color: #ffffff;
 background-color: #A454FF;
+width:75px;
+font-size: 7.5px;
+height: 10px;
+border-radius:10px;
+margin-bottom:5px;
+}
+.Green{
+text-align: center;
+display: block;
+margin-left: auto;
+margin-right: auto;
+color: #ffffff;
+background-color: #4cae4c;
+width:75px;
+font-size: 7.5px;
+height: 10px;
+border-radius:10px;
+margin-bottom:5px;
+}
+.Libertarian{
+text-align: center;
+display: block;
+margin-left: auto;
+margin-right: auto;
+color: #ffffff;
+background-color: #d58512;
 width:75px;
 font-size: 7.5px;
 height: 10px;
@@ -266,6 +292,7 @@ font-family: arial, sans-serif;
 font-size: 11.5px;
 border-collapse: collapse;
 width: 100%;
+margin-bottom: 29px;
 }
 
 .views-table tr {
