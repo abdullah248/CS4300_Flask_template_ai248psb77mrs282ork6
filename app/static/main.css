@@ -52,7 +52,7 @@ height:auto;
 .basic_info{
 display: table-cell;
 position:relative;
-background-color: #e7e7e7;
+background-color: #f2f2f2;
 width:160px;
 height:auto;
 margin-bottom:10px;
@@ -224,7 +224,7 @@ input[type=range]::-webkit-slider-runnable-track {
   animate: 0.2s;
   box-shadow: 0px 0px 0px #000000;
   background: #e7e7e7;
-  border-radius: 25px;
+  border-radius: 20px;
   border: 1px solid #8A8A8A;
 }
 input[type=range]::-webkit-slider-thumb {
@@ -232,7 +232,7 @@ input[type=range]::-webkit-slider-thumb {
   border: 1px solid #213159;
   height: 20px;
   width: 20px;
-  border-radius: 25px;
+  border-radius: 20px;
   background: #213159;
   cursor: pointer;
   -webkit-appearance: none;
@@ -257,19 +257,31 @@ margin-left:auto;
 margin-right:auto;
 }
 
-.views-table {
-  border-collapse: collapse;
+.views-table{
+padding-top: 5px;
+padding-left: 5px;
+padding-right: 5px;
+position: relative;
+font-family: arial, sans-serif;
+font-size: 11.5px;
+border-collapse: collapse;
+width: 100%;
 }
 
-.views-table {
+.views-table tr {
   border: 1px solid black;
-}
-.views-table th {
-  border: 1px solid black;
+  padding: 2px 2px 2px 2px;
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
 }
 
 .views-table td {
-  border: 1px solid black;
+  border: 1px solid #dddddd;
+  padding: 2px 2px 2px 2px;
+  text-align: left;
+  display: table-cell;
+  vertical-align: inherit;
 }
 
 .Opposes{
@@ -278,4 +290,45 @@ color:#a94442;
 
 .Favors{
 color:#34A853;
+}
+
+.summary{
+top: 0px;
+left: 0px;
+padding-top: 2px;
+padding-bottom: 2px;
+width:inherit;
+border-width: 1px;
+border-bottom-style: dashed;
+border-color: #000000;
+}
+
+.summary_header{
+text-align: center;
+text-decoration: underline;
+font-size: 14px;
+}
+
+.summary_text{
+text-align: left;
+font-size: 12px;
+}
+
+.links{
+position: absolute;
+bottom: 0px;
+left: 0px;
+padding-left: 5px;
+padding-top: 2px;
+padding-bottom: 2px;
+text-align: left;
+font-size: 11px;
+width:inherit;
+border-width: 1px;
+border-top-style: dashed;
+border-color: #000000;
+}
+
+a {
+text-decoration: none;
 }
