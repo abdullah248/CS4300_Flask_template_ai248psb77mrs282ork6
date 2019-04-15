@@ -144,8 +144,10 @@ margin-bottom:5px;
 .extra_info{
 /*display: none;*/
 position:relative;
-background-color: #9d9d9d;
+background-color: #e7e7e7;
 width:830px;
+text-align: center;
+vertical-align: top;
 margin-bottom:10px;
 }
 
@@ -253,4 +255,27 @@ width:650px;
 height:auto;
 margin-left:auto;
 margin-right:auto;
+}
+
+.views-table {
+  border-collapse: collapse;
+}
+
+.views-table {
+  border: 1px solid black;
+}
+.views-table th {
+  border: 1px solid black;
+}
+
+.views-table td {
+  border: 1px solid black;
+}
+
+.Opposes{
+color:#a94442;
+}
+
+.Favors{
+color:#34A853;
 }

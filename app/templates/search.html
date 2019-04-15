@@ -88,8 +88,8 @@
     </head>
     <body>
         <div class="topcorner">
-            <p>Project Name: {{ name }}</p>
-            <p>Student Name: ({{ netid }})</p>
+            <!-- <p>Project Name: {{ name }}</p> -->
+            <p>Creators: {{ netid }}</p>
         </div>
         <form class="form-inline global-search">
             <h1 style="font-size: 55px; font-family:Futura; color: #4285F4">
@@ -178,7 +178,26 @@
                         <p class={{d.party}}>{{d.party}}</p>
                     </div>
                     <div id={{d.idx}} class="extra_info" style="display: none;">
-                        <p class="view">Build a wall!</p>
+                        <p class="text_match">Query Match: {{d.views.text_match}}</p>
+                        <br>
+                        <table class="views-table">
+                          {% for key,value in d.views.views.items() %}
+                          <tr>
+                            <td>{{key}}</td>
+                            {% if "Opposes" in value %}
+                            <td class ="Opposes">{{value}}</td>
+                            {% endif %}
+                            {% if "Favors" in value %}
+                            <td class ="Favors">{{value}}</td>
+                            {% endif %}
+                          </tr>
+                          {% endfor %}
+                        </table>
+                        <br>
+                        <a href={{d.views.wikipedia}} class="wiki" target="_blank">Wikipedia Article: {{d.views.wikipedia}}</a>
+                        <br>
+                        <a href={{d.views.ontheissues}} class="ontheissues" target="_blank">OnTheIssues Page: {{d.views.ontheissues}}</a>
+
                     </div>
                 </div>
             {% endfor %}
