@@ -8,7 +8,7 @@ Beto_O_Rourke = {'name': 'Beto O`Rourke', 'pic': 'Candidate_Images/Beto_O`Rourke
 
 Bill_Weld = {'name': 'Bill Weld', 'pic': 'Candidate_Images/Bill_Weld.jpg', 'party': 'Republican', 'wikipedia': 'https://en.wikipedia.org/wiki/Bill_Weld_2020_presidential_campaign', 'ontheissues': 'http://ontheissues.org/Bill_Weld.htm'}
 Cory_Booker = {'name': 'Cory Booker', 'pic': 'Candidate_Images/Cory_Booker.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Political_positions_of_Cory_Booker', 'ontheissues': 'http://ontheissues.org/Cory_Booker.htm'}
-Elizabeth_Warren = {'name': 'Elizabeth_Warren', 'pic': 'Candidate_Images/Elizabeth_Warren.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Political_positions_of_Elizabeth_Warren', 'ontheissues': 'http://ontheissues.org/Elizabeth_Warren.htm'}
+Elizabeth_Warren = {'name': 'Elizabeth Warren', 'pic': 'Candidate_Images/Elizabeth_Warren.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Political_positions_of_Elizabeth_Warren', 'ontheissues': 'http://ontheissues.org/Elizabeth_Warren.htm'}
 Eric_Swalwell = {'name': 'Eric Swalwell', 'pic': 'Candidate_Images/Eric_Swalwell.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Eric_Swalwell', 'ontheissues': 'http://ontheissues.org/Eric_Swalwell.htm'}
 
 Howard_Schultz = {'name': 'Howard Schultz', 'pic': 'Candidate_Images/Howard_Schultz.jpg', 'party': 'Independent', 'wikipedia': 'https://en.wikipedia.org/wiki/Howard_Schultz', 'ontheissues': 'http://ontheissues.org/Howard_Schultz.htm'}
