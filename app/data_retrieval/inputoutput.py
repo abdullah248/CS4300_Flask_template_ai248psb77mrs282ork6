@@ -7,7 +7,7 @@ import numpy as np
 import random
 import math
 
-def func(input, textbox):
+def func(input, train_string):
 
     json_path = 'Candidate_JSONs/'
 
@@ -100,7 +100,7 @@ def func(input, textbox):
                     for l in line:
                         candidate_to_sentence[il_file.split('.')[0]].append(l)
 
-    train_string = 'Medicare-for-all'
+    # train_string = 'Medicare-for-all'
 
     train_words = train_string.split(' ')
 
