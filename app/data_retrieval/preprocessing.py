@@ -1,7 +1,6 @@
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
-# import numpy as np
 from nltk.corpus import stopwords
 import os, json, operator, editdistance
 import numpy as np
@@ -29,7 +28,7 @@ for il_file in os.listdir(il_patho):
                 for l in line:
                     candidate_to_sentence[il_file.split('.')[0]].append(l)
 
-train_string = 'repeal ObamaCare'
+train_string = 'Medicare for all'
 
 train_words = train_string.split(' ')
 
@@ -41,25 +40,25 @@ for candidate, sentences in candidate_to_sentence.items():
     train_set = [train_string] + sentences
     tfidf_matrix_train = tfidf_vectorizer.fit_transform(train_set)
     mat = cosine_similarity(tfidf_matrix_train[0], tfidf_matrix_train[1:])
-    eds = []
-    for sentence in sentences:
-        ed = editdistance.eval(train_string, sentence) + 1
-        booleansearch = True
-        count = 0
-        for word in train_words:
-            if word not in sentence:
-                booleansearch = False
-                break
-        # if booleansearch:
-        #     eds.append(10/ed)
-        # elif count == 0:
-        #     eds.append(.1/ed)
-        # else:
-        #     eds.append(1/ed)
-        eds.append(1/ed)
-    eds = np.array(eds)
-    # print(eds)
-    mat = mat * eds
+    # eds = []
+    # for sentence in sentences:
+    #     ed = editdistance.eval(train_string, sentence) + 1
+    #     booleansearch = True
+    #     count = 0
+    #     for word in train_words:
+    #         if word not in sentence:
+    #             booleansearch = False
+    #             break
+    #     # if booleansearch:
+    #     #     eds.append(10/ed)
+    #     # elif count == 0:
+    #     #     eds.append(.1/ed)
+    #     # else:
+    #     #     eds.append(1/ed)
+    #     eds.append(1/ed)
+    # eds = np.array(eds)
+    # # print(eds)
+    # mat = mat * eds
     # print(mat.shape)
     cand_scores[candidate] = mat.max()
 
