@@ -58,13 +58,13 @@ for k in data: #k is name of candidate
 sorted_list = sorted(tupleList, key=lambda x: x[1])
 print(sorted_list)
 
-top5Candidates = []
+# top5Candidates = []
 for tup in sorted_list:
     n = math.sqrt(16*numberIssues)
     #print(n)
-    top5Candidates.append(tup[0])
+    # top5Candidates.append(tup[0])
     accuracy = 100 - (abs(tup[1])/n)*100
-    print(tup[0] + " with similarity of " + str(round(accuracy,2)) + "%")
+    print(tup[0].replace('_', ' ') + " with similarity of " + str(round(accuracy,2)) + "%")
 
 
-top5Candidates = []
+# top5Candidates = []

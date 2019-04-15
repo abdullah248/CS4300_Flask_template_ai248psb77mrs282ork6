@@ -17,10 +17,28 @@ print ("\nCalculating document similarity scores...")
 
 dataset = []
 for name in json_files:
-    file_nam = '/Users/ohadkoronyo/Desktop/justjson/Txt_Files/' + name
+    file_nam = 'Txt_Files/' + name
     f = open(file_nam)
     docer = str(f.read())
     dataset.append(docer)
+
+
+il_patho = 'Txt_Files'
+
+candidate_to_sentence = {}
+
+# for il_file in os.listdir(il_patho):
+#     with open(os.path.join(il_patho, il_file)) as txt:
+#         candidate_to_sentence[il_file.split('.')[0]] = []
+#         lines = txt.readlines()
+#         for line in lines:
+#             line = line.strip()
+#             if line != '\n' and len(line) != 0 and line[0] != '=':
+#                 line = line.split('.')
+#                 for l in line:
+#                     candidate_to_sentence[il_file.split('.')[0]].append(l)
+
+# print(candidate_to_sentence)
 
 train_string = 'pence'
 
