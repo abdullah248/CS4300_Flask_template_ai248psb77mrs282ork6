@@ -8,8 +8,10 @@
                 var x = document.getElementById(id);
                 if (x.style.display === "none") {
                     x.style.display = "table-cell";
+                    x.style.value = "-";
                 } else {
                     x.style.display = "none";
+                    x.style.value = "+";
                 }
             }
         </script>
@@ -54,9 +56,9 @@
                       range.class = "range"
                       range.name= "range" + count;
                       range.type = 'range';
-                      range.value = '2';
-                      range.min = '0'
-                      range.max = '4'
+                      range.value = '3';
+                      range.min = '1'
+                      range.max = '5'
                       range.step = '1'
 
                       // Good practice to do error checking
@@ -140,7 +142,7 @@
                         </select>
                       </td>
                       <td>
-                        <div><input type="range" value="2" min="0" max="4" step="1" name="range0"></div>
+                        <div><input type="range" value="3" min="1" max="5" step="1" name="range0"></div>
                         <div class="range-slider" name ="range0" data-slider="3" data-options="start: 1; end: 5;">
                             <span class="range-slider-handle" role="slider" tabindex="0"></span>
                             <span class="range-slider-active-segment"></span>
@@ -165,7 +167,7 @@
         </form>
         <form class="form-inline global-search">
         {% if data %}
-            <h1>{{output_message}}</h1>
+            <!-- <h1>{{output_message}}</h1> -->
             {% for d in data %}
                 <br>
                 <br>
@@ -178,26 +180,36 @@
                         <p class={{d.party}}>{{d.party}}</p>
                     </div>
                     <div id={{d.idx}} class="extra_info" style="display: none;">
-                        <p class="text_match">Query Match: {{d.views.text_match}}</p>
+                      <div class="summary">
+                        <p class="summary_header">Wikipedia Summary</p>
                         <br>
-                        <table class="views-table">
-                          {% for key,value in d.views.views.items() %}
-                          <tr>
-                            <td>{{key}}</td>
-                            {% if "Opposes" in value %}
-                            <td class ="Opposes">{{value}}</td>
-                            {% endif %}
-                            {% if "Favors" in value %}
-                            <td class ="Favors">{{value}}</td>
-                            {% endif %}
-                          </tr>
-                          {% endfor %}
-                        </table>
-                        <br>
+                        <p class="summary_text">{{d.views.text_match}}</p>
+                      </div>
+                      <br>
+                      <table class="views-table" style="width:100%; z-index:1;">
+                        {% for key,value in d.views.views.items() %}
+                          {% if loop.index!=1 and loop.index%4==1 %}
+                            </tr>
+                          {% endif %}
+                          {% if loop.index%4==1 %}
+                            <tr>
+                          {% endif %}
+                              <td>{{key}}</td>
+                              {% if "Opposes" in value %}
+                                <td class ="Opposes">{{value}}</td>
+                              {% endif %}
+                              {% if "Favors" in value %}
+                                <td class ="Favors">{{value}}</td>
+                              {% endif %}
+                        {% endfor %}
+                        </tr>
+                      </table>
+                      <br>
+                      <div class="links">
                         <a href={{d.views.wikipedia}} class="wiki" target="_blank">Wikipedia Article: {{d.views.wikipedia}}</a>
                         <br>
                         <a href={{d.views.ontheissues}} class="ontheissues" target="_blank">OnTheIssues Page: {{d.views.ontheissues}}</a>
-
+                      </div>
                     </div>
                 </div>
             {% endfor %}
