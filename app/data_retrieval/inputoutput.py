@@ -31,6 +31,8 @@ def getInput(input, train_string):
                     stri = s[0]
                     if stri == 'No opinion on':
                         stri = 'No opinion'
+                    if stri == 'Neutral on':
+                        stri = 'Neutral'
                     issue = s[1].split(':')[1]
                     candViewDict[issue] = stri
 
@@ -38,7 +40,7 @@ def getInput(input, train_string):
                         vector.append(1)
                     elif stri == 'Opposes':
                         vector.append(2)
-                    elif stri == 'No opinion':
+                    elif stri == 'No opinion' or stri == 'Neutral':
                         vector.append(3)
                     elif stri == 'Favors':
                         vector.append(4)
