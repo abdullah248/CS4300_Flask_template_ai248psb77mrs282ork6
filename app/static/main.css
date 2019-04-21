@@ -48,6 +48,41 @@ margin: 0;
 text-align: left;
 }
 
+/* Help */
+/* https://www.w3schools.com/css/css_tooltip.asp */
+
+.tooltip1 {
+  position: relative;
+  display: inline-block;
+  color: #ce8483;
+  /*border-bottom: 1px dotted black;*/
+}
+
+.tooltip1 .tooltiptext1 {
+  visibility: hidden;
+  width: 300px;
+  font-size: 12px;
+  opacity: 0.75;
+  background-color: #ce8483;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip1:hover .tooltiptext1 {
+  visibility: visible;
+}
+
+/* Search */
+
 .output_message {
 display: inline;
 font-size: 18px;
