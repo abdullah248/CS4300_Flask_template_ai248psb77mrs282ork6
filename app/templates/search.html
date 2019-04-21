@@ -4,14 +4,16 @@
         <link rel="stylesheet" href="/static/main.css">
 {#        <script type="text/javascript" src="js/script.js"></script>#}
         <script>
-            function expand(id) {
+            function expand(id, id2) {
                 var x = document.getElementById(id);
                 if (x.style.display === "none") {
                     x.style.display = "table-cell";
-                    x.style.value = "-";
+                    id2.value = "-";
+                    id2.style.backgroundColor = "#f04b4c";
                 } else {
                     x.style.display = "none";
-                    x.style.value = "+";
+                    id2.value = "+";
+                    id2.style.backgroundColor = "#009688";
                 }
             }
         </script>
@@ -167,7 +169,26 @@
         </form>
         <form class="form-inline global-search">
         {% if data %}
-{#            <!-- <h1>{{output_message}}</h1> -->#}
+            <div class="header">
+                <h1 class="hd1">Search:</h1>
+                <br>
+                <p class="output_message query">{{query}}</p>
+                <br>
+                {% for p,s in stanceP %}
+                    <p class="output_message">{{s+": "}}</p>
+                    {% if "Opposes" in p %}
+                        <p class="output_message Opposes">{{p}}</p>
+                    {% endif %}
+                    {% if "Favors" in p %}
+                        <p class="output_message Favors">{{p}}</p>
+                    {% endif %}
+                    {% if "Neutral" in p %}
+                        <p class="output_message Neutral">{{p}}</p>
+                    {% endif %}
+                    <br>
+                {% endfor %}
+            <h1 class="hd1">Results:</h1>
+            </div>
             {% for d in data %}
                 <br>
                 <br>
@@ -176,7 +197,8 @@
                         <p class="id">{{d.idx+1}}</p>
                         <img src={{"/static/"+d.pic}} alt={{d.name}} class="profile_image">
                         <figcaption class="name">{{d.name}}</figcaption>
-                        <button id="{{"button"+d.idx|string}}" type="button" class="arrow" onclick="return expand({{d.idx}})">+</button>
+                        <input id={{"button"+d.idx|string}} type="button" value="+" class="arrow w3-button w3-xlarge w3-circle w3-teal" onclick="expand({{d.idx}},this)" style="background-color:#009688">
+{#                        <button id="{{"button"+d.idx|string}}" type="button" class="arrow" onclick="return expand({{d.idx}})"><img src="/static/assets/m.png" width="30px" height="30px" align="middle" /></button>#}
                         <p class={{d.party}}>{{d.party}}</p>
                     </div>
                     <div id={{d.idx}} class="extra_info" style="display: none;">
@@ -194,19 +216,36 @@
                           {% if loop.index%4==1 %}
                             <tr>
                           {% endif %}
+                            {% if key in stances %}
+                              <td class="highlight">{{key}}</td>
+                                {% if "Opposes" in value %}
+                                    <td class ="Opposes highlight">{{value}}</td>
+                                {% endif %}
+                                {% if "Favors" in value %}
+                                    <td class ="Favors highlight">{{value}}</td>
+                                {% endif %}
+                                {% if "No" in value %}
+                                    <td class ="No highlight">{{value}}</td>
+                                {% endif %}
+                                {% if "Neutral" in value %}
+                                    <td class ="neutral highlight">{{value}}</td>
+                                {% endif %}
+                            {% endif %}
+                            {% if key not in stances %}
                               <td>{{key}}</td>
-                              {% if "Opposes" in value %}
-                                <td class ="Opposes">{{value}}</td>
-                              {% endif %}
-                              {% if "Favors" in value %}
-                                <td class ="Favors">{{value}}</td>
-                              {% endif %}
-                              {% if "No" in value %}
-                                <td class ="No">{{value}}</td>
-                              {% endif %}
-                              {% if "Neutral" in value %}
-                                <td class ="neutral">{{value}}</td>
-                              {% endif %}
+                                {% if "Opposes" in value %}
+                                    <td class ="Opposes">{{value}}</td>
+                                {% endif %}
+                                {% if "Favors" in value %}
+                                    <td class ="Favors">{{value}}</td>
+                                {% endif %}
+                                {% if "No" in value %}
+                                    <td class ="No">{{value}}</td>
+                                {% endif %}
+                                {% if "Neutral" in value %}
+                                    <td class ="neutral">{{value}}</td>
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}
                         </tr>
                       </table>

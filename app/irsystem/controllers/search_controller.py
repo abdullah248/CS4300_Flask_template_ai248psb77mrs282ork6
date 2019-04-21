@@ -10,26 +10,51 @@ net_id = "Abdullah Islam: ai248, Prathamesh Bang: psb77, Milan Shah: mrs282, Oha
 def search():
 	query = request.args.get('search')
 	arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	positions = ["Abortion is a woman's unrestricted right",
+				 "Legally require hiring women & minorities",
+				 "Comfortable with same-sex marriage",
+				 "Keep God in the public sphere",
+				 "Expand ObamaCare",
+				 "Privatize Social Security",
+				 "Vouchers for school choice",
+				 "Fight EPA regulatory over-reach",
+				 "Stricter punishment reduces crime",
+				 "Absolute right to gun ownership",
+				 "Higher taxes on the wealthy",
+				 "Pathway to citizenship for illegal aliens",
+				 "Support & expand free trade",
+				 "Support American Exceptionalism",
+				 "Expand the military",
+				 "Make voter registration easier",
+				 "Avoid foreign entanglements",
+				 "Prioritize green energy",
+				 "Marijuana is a gateway drug",
+				 "Stimulus better than market-led recovery"]
+	idxStance = ["Strongly Opposes", "Opposes", "Neutral", "Favors", "Strongly Favors"]
 	count = 0
 	basestr = "select"
 	baserange = "range"
 	select = request.args.get(basestr+str(count))
-	range = request.args.get(baserange +str(count))
-	while select!=None and range!=None:
-		arr[int(select)] = int(range)
+	ranger = request.args.get(baserange +str(count))
+	while select!=None and ranger!=None:
+		arr[int(select)] = int(ranger)
 		count = count +1
 		select = request.args.get(basestr+str(count))
-		range = request.args.get(baserange +str(count))
+		ranger = request.args.get(baserange +str(count))
 	# while(select)
 	q = request.args
 
 	if not query:
 		data = []
 		output_message = ''
+		stances = []
+		stanceP = []
 	else:
 		data = getInput(arr,query)
-		print (data[0]["pic"])
-		# data = [{"idx":1,"similarity_metric": .05, "pic":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/440px-Donald_Trump_official_portrait.jpg","name":"Donald Trump","party":"Republican","views":{"text_match":"blah blah blaaah","views":{"Abortion":"Strongly Opposes", "Taxes": "Opposes","Abortion1":"Strongly Opposes", "Taxes1": "Opposes", "Abortion2":"Strongly Opposes", "Taxes2": "Opposes","Abortion3":"Strongly Opposes", "Taxes3": "Opposes","Abortion4":"Strongly Opposes", "Taxes4": "Opposes"}, "wikipedia" : "https://www.wikipedia.org/", "ontheissues":"http://www.ontheissues.org/default.htm"}},
-		# 		{"idx":2,"similarity_metric": .05, "pic":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Hillary_Clinton_official_Secretary_of_State_portrait_crop.jpg/440px-Hillary_Clinton_official_Secretary_of_State_portrait_crop.jpg","name":"Hillary Clinton","party":"Democrat","views":{"text_match":"blah blah bleeah","views":{"Abortion":"Favors", "Taxes": "Strongly Favors"}, "wikipedia" : "https://www.wikipedia.org/", "ontheissues":"http://www.ontheissues.org/default.htm"}}]
-		output_message = "Your search: "  + str(arr)
-	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=data)
+		stances = []
+		stanceP = []
+		for i in range(20):
+			if (arr[i] != 0):
+				stances.append(positions[i])
+				stanceP.append((idxStance[arr[i]-1], positions[i]))
+	return render_template('search.html', name=project_name, netid=net_id, query=query, stances=stances, stanceP=stanceP, data=data)
