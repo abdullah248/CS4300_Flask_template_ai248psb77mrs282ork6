@@ -36,15 +36,18 @@ def search():
 	baserange = "range"
 	select = request.args.get(basestr+str(count))
 	ranger = request.args.get(baserange +str(count))
+	noneChanged = True
 	while select!=None and ranger!=None:
 		arr[int(select)] = int(ranger)
 		count = count +1
 		select = request.args.get(basestr+str(count))
 		ranger = request.args.get(baserange +str(count))
+		noneChange=False
 	# while(select)
 	q = request.args
 
-	if not query and count<=1 and arr[0]==0:
+
+	if not query and count==0 and noneChanged:
 		data = []
 		output_message = ''
 		stances = []
