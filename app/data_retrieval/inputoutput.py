@@ -1,8 +1,15 @@
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.preprocessing import normalize
+from scipy.sparse.linalg import svds
 import nltk
 from nltk.corpus import stopwords
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
 import os, json, operator
+import matplotlib
+import matplotlib.pyplot as plt
 import numpy as np
 import random
 import math
@@ -10,8 +17,15 @@ from collections import defaultdict
 from app.data_retrieval.candidateinfo import *
 from app.data_retrieval.summaryDictCreate import *
 nltk.download('stopwords')
+nltk.download('vader_lexicon')
+nltk.download('punkt')
 
 def getInput(input, train_string):
+    ps = PorterStemmer()
+    original_query = word_tokenize(train_string)
+    for i, w in enumerate(original_query):
+        original_query[i] = ps.stem(w)
+    original_query =  " ".join(original_query)
 
     json_path = 'app/data_retrieval/Candidate_JSONs/'
 
@@ -51,8 +65,8 @@ def getInput(input, train_string):
             candidate_to_vector[json_file.split('.')[0]] = vector
 
 
-    print(candidate_to_vector)
-    print(viewDict)
+    # print(candidate_to_vector)
+    # print(viewDict)
 
     #input = []
     numberIssues = 20
@@ -60,7 +74,7 @@ def getInput(input, train_string):
     #for i in range(numberIssues):
     #    input.append(random.randint(1,5))
     #input = np.array(input)
-    print("\nInput is "+str(input))
+    # print("\nInput is "+str(input))
 
     data = candidate_to_vector
     #print(data)
@@ -88,7 +102,7 @@ def getInput(input, train_string):
         accuracy = 100 - (abs(tup[1])/n)*100
         #print(tup[0].replace('_', ' ') + " with similarity of " + str(round(accuracy,2)) + "%")
         squaredDistanceList.append((tup[0], round(accuracy,2)))
-    print(squaredDistanceList)
+    # print(squaredDistanceList)
 
 
     stopWords = stopwords.words('english')
@@ -104,20 +118,70 @@ def getInput(input, train_string):
             for line in lines:
                 line = line.strip()
                 if line != '\n' and len(line) != 0 and line[0] != '=':
-                    line = line.split('.')
-                    for l in line:
-                        candidate_to_sentence[il_file.split('.')[0]].append(l)
+                    sents = sent_tokenize(line)
+                    for sent in sents:
+                        the_words = word_tokenize(sent)
+                        for y, w in enumerate(the_words):
+                            the_words[y] = ps.stem(w)
+                        sent = " ".join(the_words)
+                        candidate_to_sentence[il_file.split('.')[0]].append(sent)
 
-    train_words = train_string.split(' ')
+    train_words = word_tokenize(original_query)
 
-    tfidf_vectorizer = TfidfVectorizer(stop_words=stopWords)
+    all_sentences = []
+    for sentences in candidate_to_sentence.values():
+        all_sentences += sentences
+
+    tfidf_vectorizer = TfidfVectorizer(stop_words=stopWords, min_df=0.001, max_df=0.5)
+    my_matrix = tfidf_vectorizer.fit_transform(all_sentences).transpose()
+    words_compressed, s, v_trans = svds(my_matrix, 25)
+    docs_compressed = v_trans.transpose()
+
+    word_to_index = tfidf_vectorizer.vocabulary_
+    index_to_word = {i:t for t,i in word_to_index.items()}
+
+    words_compressed = normalize(words_compressed, axis = 1)
 
     cand_scores = {}
 
+    train_string = original_query
+
+    for strin in train_words:
+        if strin in word_to_index:
+            sims = words_compressed.dot(words_compressed[word_to_index[strin],:])
+            asort = np.argsort(-sims)[:2+1]
+            final_arr = [(index_to_word[i],sims[i]/sims[asort[0]]) for i in asort[1:]]
+            for word, val in final_arr:
+                train_string = train_string + ' ' + word
+
+    print(train_string)
+
+
+    sia = SentimentIntensityAnalyzer()
+
+    query_sentiment = sia.polarity_scores(original_query)['compound']
+    print(query_sentiment)
     for candidate, sentences in candidate_to_sentence.items():
-        train_set = [train_string] + sentences
+        # for x, sentence in enumerate(sentences):
+        #     the_words = word_tokenize(sentence)
+        #     for y, w in enumerate(the_words):
+        #         the_words[y] = ps.stem(w)
+        #     the_words = " ".join(the_words)
+        #     sentences[x] = the_words
+
+        train_set = [original_query] + sentences
         tfidf_matrix_train = tfidf_vectorizer.fit_transform(train_set)
         mat = cosine_similarity(tfidf_matrix_train[0], tfidf_matrix_train[1:])
+        # print(mat.shape)
+        # i = 0
+        # for sentence in sentences:
+        #     s1 = sia.polarity_scores(sentence)['compound']
+        #     # diff = abs(query_sentiment - s1)
+        #     # mat[0][i] = mat[0][i] - diff
+        #     i += 1
+
+
+
         # eds = []
         # for sentence in sentences:
         #     ed = editdistance.eval(train_string, sentence) + 1
@@ -138,7 +202,9 @@ def getInput(input, train_string):
         # # print(eds)
         # mat = mat * eds
         # print(mat.shape)
-        cand_scores[candidate] = mat.max()
+        diff = abs(query_sentiment - sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
+        cand_scores[candidate] = mat.max() - diff
+        print (candidate, sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
 
     # print(cand_scores)
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
@@ -154,8 +220,8 @@ def createOutput(firstMetricList,SecondMetricList,data,viewDict):
 
     for i in range(len(firstMetricList)):
         combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
-    print("\nCombined tuple list is: ")
-    print(combinedTupleList)
+    # print("\nCombined tuple list is: ")
+    # print(combinedTupleList)
 
 
     for i in range(len(combinedTupleList)):
@@ -164,11 +230,11 @@ def createOutput(firstMetricList,SecondMetricList,data,viewDict):
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
         'views':viewDict[combinedTupleList[i][0]],'summary':candSummary}})
-
-    print()
-    print()
-    print()
-    print(outputList)
+    #
+    # print()
+    # print()
+    # print()
+    # print(outputList)
     return outputList
 
 # getInput([5, 2, 5, 2, 5, 1, 5, 1, 1, 2, 2, 5, 2, 1, 1, 5, 5, 5, 1, 0],"I love donald trump")
