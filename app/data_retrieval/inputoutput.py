@@ -229,7 +229,7 @@ def createOutput(firstMetricList,SecondMetricList,data,viewDict):
         candSummary = candidate_to_summary[combinedTupleList[i][0]]
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
-        'views':viewDict[combinedTupleList[i][0]],'summary':candSummary}})
+        'views':viewDict[combinedTupleList[i][0]],'summary':candSummary},'sentiment':cand['sentiment']})
     #
     # print()
     # print()
