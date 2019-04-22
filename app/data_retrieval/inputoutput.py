@@ -222,13 +222,13 @@ def createOutput(firstMetricList,secondMetricList,data,viewDict):
     # print('here')
     for i in range(len(firstMetricList)):
         # combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
-        cand_scores[firstMetricList[i][0]] = i
-    k = 3
+        cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
+    k = 15
     for j in range(3):
-        cand_scores[secondMetricList[j][0]] -= k
-        k -= 1
+        cand_scores[secondMetricList[j][0]] = min(100, k + cand_scores[secondMetricList[j][0]])
+        k -= 5
 
-    sorted_x = sorted(cand_scores.items(), key=lambda x: x[1])
+    sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
     # print("\nCombined tuple list is: ")
     # print(combinedTupleList)
 
@@ -239,7 +239,7 @@ def createOutput(firstMetricList,secondMetricList,data,viewDict):
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
         'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand['positive_sentiment'],
-        'negative_sentiment':cand['negative_sentiment'], 'neutral_sentiment':cand['neutral_sentiment']})
+        'negative_sentiment':cand['negative_sentiment'], 'neutral_sentiment':cand['neutral_sentiment'], 'similarity':cand_scores[sorted_x[i][0]]})
         # print(cand['name'] + ' ' + str(cand['sentiment']))
     #
     # print()
