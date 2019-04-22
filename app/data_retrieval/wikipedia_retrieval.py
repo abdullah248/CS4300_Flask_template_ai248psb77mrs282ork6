@@ -29,8 +29,8 @@ import wikipedia
 # tulsi_gabbard = wikipedia.page(title='Tulsi Gabbard')
 # tim_ryan = wikipedia.page(title='Tim Ryan (Ohio politician)')
 
-Seth_Moulton = wikipedia.page(title='Seth Moulton')
-with open('Txt_files/Seth_Moulton.txt', 'w') as file:
-    file.write(Seth_Moulton.content)
-with open('summaries/Seth_Moulton.txt', 'w') as file:
-    file.write(Seth_Moulton.summary)
+# Seth_Moulton = wikipedia.page(title='Seth Moulton')
+# with open('Txt_files/Seth_Moulton.txt', 'w') as file:
+#     file.write(Seth_Moulton.content)
+# with open('summaries/Seth_Moulton.txt', 'w') as file:
+#     file.write(Seth_Moulton.summary)
