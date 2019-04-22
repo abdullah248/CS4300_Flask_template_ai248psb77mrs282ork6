@@ -35,6 +35,8 @@ Pete_Buttigieg = {'name': 'Pete Buttigieg', 'pic': 'Candidate_Images/Pete_Buttig
 Tulsi_Gabbard = {'name': 'Tulsi Gabbard', 'pic': 'Candidate_Images/Tulsi_Gabbard.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Tulsi_Gabbard', 'ontheissues': 'http://ontheissues.org/Tulsi_Gabbard.htm'}
 Tim_Ryan = {'name': 'Tim Ryan', 'pic': 'Candidate_Images/Tim_Ryan.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Tim_Ryan_(Ohio_politician)', 'ontheissues': 'http://ontheissues.org/Tim_Ryan.htm'}
 
+Seth_Moulton = {'name': 'Seth Moulton', 'pic': 'Candidate_Images/Seth_Moulton.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Seth_Moulton', 'ontheissues': 'http://ontheissues.org/Seth_Moulton.htm'}
+
 bigDict = {'Donald_Trump':Donald_Trump,'Amy_Klobuchar':Amy_Klobuchar,'Andrew_Yang':Andrew_Yang,
 'Arvin_Vohra':Arvin_Vohra,'Bernie_Sanders':Bernie_Sanders,'Beto_O`Rourke':Beto_O_Rourke,
 'Bill_Weld':Bill_Weld,'Cory_Booker':Cory_Booker,'Elizabeth_Warren':Elizabeth_Warren,'Eric_Swalwell':Eric_Swalwell,
@@ -43,7 +45,7 @@ bigDict = {'Donald_Trump':Donald_Trump,'Amy_Klobuchar':Amy_Klobuchar,'Andrew_Yan
 'Julian_Castro':Julian_Castro,'Kamala_Harris':Kamala_Harris,'Kirsten_Gillibrand':Kirsten_Gillibrand,
 'Larry_Hogan':Larry_Hogan,'Marianne_Williamson':Marianne_Williamson,'Michael_Bennet':Michael_Bennet,
 'Mike_Gravel':Mike_Gravel,'Mike_Pence':Mike_Pence,'Pete_Buttigieg':Pete_Buttigieg,'Tulsi_Gabbard':Tulsi_Gabbard,
-'Tim_Ryan':Tim_Ryan}
+'Tim_Ryan':Tim_Ryan, 'Seth_Moulton':Seth_Moulton}
 
 for candDict in bigDict.values():
-    candDict['sentiment'] = round(runTwitterAnalysis(candDict['name']),2)
+    candDict['positive_sentiment'], candDict['negative_sentiment'], candDict['neutral_sentiment'] = runTwitterAnalysis(candDict['name'])
