@@ -2,7 +2,6 @@
     <head>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
-{#        <script type="text/javascript" src="js/script.js"></script>#}
         <script>
             function expand(id, id2) {
                 var x = document.getElementById(id);
@@ -84,7 +83,6 @@
           }
         </script>
 
-
         {#http://api.jqueryui.com/autocomplete/#}
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.12.4.js"></script>
@@ -95,6 +93,7 @@
             <!-- <p>Project Name: {{ name }}</p> -->
             <p>Creators: {{ netid }}</p>
         </div>
+
         <form class="form-inline global-search">
             <h1 style="font-size: 55px; font-family:Futura; color: #4285F4">
                 C
@@ -108,6 +107,8 @@
                 <font color=#34A853>T</font>
                 <font color=#EA4335>Y</font>
             </h1>
+
+            <div class="tooltip1">?<span class="tooltiptext1">Instructions:<br><br>Select 1-20 issues along with your preferred stance.<br>Optionally input a view on an additional issue.</span> </div>
 
             <br><br>
             <div class="form-group">
