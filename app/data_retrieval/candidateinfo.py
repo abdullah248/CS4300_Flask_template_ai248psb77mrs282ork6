@@ -48,4 +48,4 @@ bigDict = {'Donald_Trump':Donald_Trump,'Amy_Klobuchar':Amy_Klobuchar,'Andrew_Yan
 'Tim_Ryan':Tim_Ryan, 'Seth_Moulton':Seth_Moulton}
 
 for candDict in bigDict.values():
-    candDict['sentiment'] = round(runTwitterAnalysis(candDict['name']),2)
+    candDict['positive_sentiment'], candDict['negative_sentiment'], candDict['neutral_sentiment'] = runTwitterAnalysis(candDict['name'])

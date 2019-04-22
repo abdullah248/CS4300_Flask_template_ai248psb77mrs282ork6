@@ -238,13 +238,14 @@ def createOutput(firstMetricList,secondMetricList,data,viewDict):
         candSummary = candidate_to_summary[sorted_x[i][0]]
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
-        'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'sentiment':cand['sentiment']})
-        print(cand['name'] + ' ' + str(cand['sentiment']))
+        'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand['positive_sentiment'],
+        'negative_sentiment':cand['negative_sentiment'], 'neutral_sentiment':cand['neutral_sentiment']})
+        # print(cand['name'] + ' ' + str(cand['sentiment']))
     #
     # print()
     # print()
     # print()
-    # print(outputList)
+    print(outputList)
     return outputList
 
 # getInput([5, 2, 5, 2, 5, 1, 5, 1, 1, 2, 2, 5, 2, 1, 1, 5, 5, 5, 1, 0],"I love donald trump")
