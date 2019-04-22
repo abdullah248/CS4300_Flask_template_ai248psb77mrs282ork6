@@ -21,6 +21,7 @@ nltk.download('vader_lexicon')
 nltk.download('punkt')
 
 def getInput(input, train_string):
+    # print('here')
     ps = PorterStemmer()
     original_query = word_tokenize(train_string)
     for i, w in enumerate(original_query):
@@ -154,13 +155,13 @@ def getInput(input, train_string):
             for word, val in final_arr:
                 train_string = train_string + ' ' + word
 
-    print(train_string)
+    # print(train_string)
 
 
     sia = SentimentIntensityAnalyzer()
 
     query_sentiment = sia.polarity_scores(original_query)['compound']
-    print(query_sentiment)
+    # print(query_sentiment)
     for candidate, sentences in candidate_to_sentence.items():
         # for x, sentence in enumerate(sentences):
         #     the_words = word_tokenize(sentence)
@@ -204,32 +205,41 @@ def getInput(input, train_string):
         # print(mat.shape)
         diff = abs(query_sentiment - sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
         cand_scores[candidate] = mat.max() - diff
-        print (candidate, sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
+        # print (candidate, sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
 
     # print(cand_scores)
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
-    print(sorted_x)
+    # print(sorted_x)
 
     return createOutput(squaredDistanceList,sorted_x,data,viewDict)
 
 
 
-def createOutput(firstMetricList,SecondMetricList,data,viewDict):
+def createOutput(firstMetricList,secondMetricList,data,viewDict):
     outputList = []
     combinedTupleList = []
-
+    cand_scores = {}
+    # print('here')
     for i in range(len(firstMetricList)):
-        combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
+        # combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
+        cand_scores[firstMetricList[i][0]] = i
+    k = 3
+    for j in range(3):
+        cand_scores[secondMetricList[j][0]] -= k
+        k -= 1
+
+    sorted_x = sorted(cand_scores.items(), key=lambda x: x[1])
     # print("\nCombined tuple list is: ")
     # print(combinedTupleList)
 
 
-    for i in range(len(combinedTupleList)):
-        cand = bigDict[combinedTupleList[i][0]]
-        candSummary = candidate_to_summary[combinedTupleList[i][0]]
+    for i in range(len(sorted_x)):
+        cand = bigDict[sorted_x[i][0]]
+        candSummary = candidate_to_summary[sorted_x[i][0]]
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
-        'views':viewDict[combinedTupleList[i][0]],'summary':candSummary},'sentiment':cand['sentiment']})
+        'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'sentiment':cand['sentiment']})
+        print(cand['name'] + ' ' + str(cand['sentiment']))
     #
     # print()
     # print()
