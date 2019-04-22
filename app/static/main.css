@@ -496,14 +496,46 @@ text-decoration: none;
   flex-flow: row nowrap;
 }
 
-.single-chart {
-  width: 33%;
+.sim_chart {
+  position: relative;
+  bottom: 7.5px;
+  left: 0px;
+  width: 50px;
+  height: 50px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 35px;
+  /*width: 33%;*/
   justify-content: space-around ;
+}
+
+.sent_chart {
+  position: relative;
+  bottom: 7.5px;
+  right: 0px;
+  width: 50px;
+  height: 50px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-right: 35px;
+  /*width: 33%;*/
+  justify-content: space-around;
+}
+
+.pie-title{
+text-align: center;
+display: inline-block;
+font-size: 10px;
+margin-bottom:0px;
 }
 
 .circular-chart {
   display: block;
-  margin: 10px auto;
+  margin: 5px auto;
   max-width: 80%;
   max-height: 250px;
 }
@@ -521,9 +553,25 @@ text-decoration: none;
   animation: progress 1s ease-out forwards;
 }
 
-.circleP {
+.cN {
+  fill: none;
+  stroke: gray;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+.cP {
   fill: none;
   stroke: green;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+.cNeg {
+  fill: none;
+  stroke: red;
   stroke-width: 2.8;
   stroke-linecap: round;
   animation: progress 1s ease-out forwards;

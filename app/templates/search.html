@@ -121,8 +121,8 @@
 {#                        <button id="{{"button"+d.idx|string}}" type="button" class="arrow" onclick="return expand({{d.idx}})"><img src="/static/assets/m.png" width="30px" height="30px" align="middle" /></button>#}
                         <p class={{d.party}}>{{d.party}}</p>
                         <div class="flex-wrapper">
-                          <div class="single-chart">
-                            <p class="pie-title">Similarity </p>
+                          <div class="sim_chart">
+                            <p class="pie-title">Similarity</p>
                             <svg viewBox="0 0 36 36" class="circular-chart orange">
                               <path class="circle-bg"
                                 d="M18 2.0845
@@ -130,15 +130,15 @@
                                   a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
                               <path class="circle"
-                                stroke-dasharray="67, 100"
+                                stroke-dasharray="{{d.similarity}}, 100"
                                 d="M18 2.0845
                                   a 15.9155 15.9155 0 0 1 0 31.831
                                   a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
-                              <text x="18" y="20.35" class="percentage">30%</text>
+                              <text x="18" y="20.35" class="percentage">{{d.similarity}}%</text>
                             </svg>
                           </div>
-                          <div class="single-chart">
+                          <div class="sent_chart">
                             <p class = "pie-title">Sentiment</p>
                             <svg viewBox="0 0 36 36" class="circular-chart orange">
                               <path class="circle-bg"
@@ -146,20 +146,27 @@
                                   a 15.9155 15.9155 0 0 1 0 31.831
                                   a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
-                              <path class="circle"
-                                stroke-dasharray="26,100"
+                              <path class="cN"
+                                stroke-dasharray="{{d.neutral_sentiment - 4}},100"
                                 d="M18 2.0845
                                   a 15.9155 15.9155 0 0 1 0 31.831
                                   a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
-                              <path class="circleP"
-                                stroke-dasharray="30,100"
-                                stroke-dashoffset="31"
+                              <path class="cP"
+                                stroke-dasharray="1,{{d.neutral_sentiment}},{{d.positive_sentiment - 4}},100"
+                                stroke-dashoffset="1"
                                 d="M18 2.0845
                                   a 15.9155 15.9155 0 0 1 0 31.831
                                   a 15.9155 15.9155 0 0 1 0 -31.831"
                               />
-                              <text x="18" y="20.35" class="percentage">30%</text>
+                              <path class="cNeg"
+                                stroke-dasharray="1,{{d.neutral_sentiment + d.positive_sentiment}},{{d.negative_sentiment - 4}},100"
+                                stroke-dashoffset="1"
+                                d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                              />
+                              <text x="18" y="20.35" class="percentage"></text>
                             </svg>
                           </div>
 
