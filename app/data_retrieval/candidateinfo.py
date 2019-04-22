@@ -1,4 +1,5 @@
-from app.data_retrieval.TwitterSentiment import *
+# from app.data_retrieval.TwitterSentiment import *
+import pickle, os
 
 Donald_Trump = {'name': 'Donald Trump', 'pic': 'Candidate_Images/Donald_Trump.jpg', 'party': 'Republican', 'wikipedia': 'https://en.wikipedia.org/wiki/Political_positions_of_Donald_Trump', 'ontheissues': 'http://ontheissues.org/Donald_Trump.htm'}
 Amy_Klobuchar = {'name': 'Amy Klobuchar', 'pic': 'Candidate_Images/Amy_Klobuchar.jpg', 'party': 'Democratic', 'wikipedia': 'https://en.wikipedia.org/wiki/Amy_Klobuchar', 'ontheissues': 'http://ontheissues.org/Amy_Klobuchar.htm'}
@@ -46,6 +47,3 @@ bigDict = {'Donald_Trump':Donald_Trump,'Amy_Klobuchar':Amy_Klobuchar,'Andrew_Yan
 'Larry_Hogan':Larry_Hogan,'Marianne_Williamson':Marianne_Williamson,'Michael_Bennet':Michael_Bennet,
 'Mike_Gravel':Mike_Gravel,'Mike_Pence':Mike_Pence,'Pete_Buttigieg':Pete_Buttigieg,'Tulsi_Gabbard':Tulsi_Gabbard,
 'Tim_Ryan':Tim_Ryan, 'Seth_Moulton':Seth_Moulton}
-
-for candDict in bigDict.values():
-    candDict['positive_sentiment'], candDict['negative_sentiment'], candDict['neutral_sentiment'] = runTwitterAnalysis(candDict['name'])
