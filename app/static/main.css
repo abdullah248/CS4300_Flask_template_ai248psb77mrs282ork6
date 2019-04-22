@@ -9,12 +9,63 @@ padding: 20px 0;
 text-align:center;
 }
 body {
-padding-top: 15%;
-padding-bottom: 15px;
-background-color:#3d6098;
+background-color:#3D6098;
 }
+
+#title{
+border-bottom: solid 2px;
+border-top: solid 2px;
+padding-left: 0.05em;
+letter-spacing: 0.2em;
+}
+#search-area{
+height:100%;
+width:100%;
+background-color:#F2F2F2;
+background-image: url('/static/UIHere.png');
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+position: relative;
+
+
+}
+#overlay{
+/* padding-top: 15%;
+padding-bottom: 15px; */
+background: url('/static/overlay.png') repeat;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+position: absolute;
+z-index: 2;
+text-align: center;
+}
+
+#center-box{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: #3d6090;
+/* background: rgba(33,49,89, 0.5); */
+background: rgba(61,96,152, 0.5);
+padding-left: 20px;
+padding-right: 20px;
+}
+
+#label0{
+color:#ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 .global-search {
 text-align:center;
+vertical-align: middle;
 padding:10px;
 }
 .global-search .form-control {
@@ -25,11 +76,11 @@ display:inline-block;
 margin-bottom:0;
 }
 }
-.topcorner{
+/* .topcorner{
 position:absolute;
 top:2%;
 right:2%;
-}
+} */
 .btn{
 background-color: #f04b4c;
 border: none
@@ -54,7 +105,7 @@ text-align: left;
 .tooltip1 {
   position: relative;
   display: inline-block;
-  color: #ce8483;
+  color: #ffffff;
   /*border-bottom: 1px dotted black;*/
 }
 
@@ -63,7 +114,7 @@ text-align: left;
   width: 300px;
   font-size: 12px;
   opacity: 0.75;
-  background-color: #ce8483;
+  background-color: #3d6098;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -72,9 +123,9 @@ text-align: left;
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
+  bottom: 50%;
+  left: 100%;
+  margin-bottom: -50px;
 }
 
 .tooltip1:hover .tooltiptext1 {
@@ -296,13 +347,17 @@ input[type=submit] {
 
 /* Slider */
 /*https://www.cssportal.com/style-input-range/*/
+.range-holder{
+  margin-left: 20px;
+}
 
 input[type=range] {
   height: 10px;
   -webkit-appearance: none;
   margin: 10px 0;
   width: 300px;
-  background-color:#3d6098;
+  background-color: transparent;
+  /* background-color:#3d6098; */
 }
 input[type=range]:focus {
   outline: none;
@@ -341,7 +396,7 @@ margin-bottom: 10px;
 }
 
 #select-range-table{
-width:650px;
+width:750;
 height:auto;
 margin-left:auto;
 margin-right:auto;

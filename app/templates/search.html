@@ -2,86 +2,10 @@
     <head>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
-        <script>
-            function expand(id, id2) {
-                var x = document.getElementById(id);
-                if (x.style.display === "none") {
-                    x.style.display = "table-cell";
-                    id2.value = "-";
-                    id2.style.backgroundColor = "#f04b4c";
-                } else {
-                    x.style.display = "none";
-                    id2.value = "+";
-                    id2.style.backgroundColor = "#009688";
-                }
-            }
-        </script>
-        <script>
-          var limit = 20; // Max question
-          var count = 1; // There are 4 questions already
 
-          function addQuestion()
-          {
-              var table = document.getElementById('select-range-table');
-              if (table)
-              {
-                  if (count < limit)
-                  {
-                      var linebreak = document.createElement("br");
-                      var select = document.createElement('select');
-                      select.name = "select" + count;
-                      select.class = "select"
-                      select.options[0] = new Option("Abortion is a woman's unrestricted right", "0");
-                      select.options[1] = new Option("Legally require hiring women & minorities", "1");
-                      select.options[2] = new Option("Comfortable with same-sex marriage", "2");
-                      select.options[3] = new Option("Keep God in the public sphere", "3");
-                      select.options[4] = new Option("Expand ObamaCare", "4");
-                      select.options[5] = new Option("Privatize Social Security", "5");
-                      select.options[6] = new Option("Vouchers for school choice", "6");
-                      select.options[7] = new Option("Fight EPA regulatory over-reach", "7");
-                      select.options[8] = new Option("Stricter punishment reduces crime", "8");
-                      select.options[9] = new Option("Absolute right to gun ownership", "9");
-                      select.options[10] = new Option("Higher taxes on the wealthy", "10");
-                      select.options[11] = new Option("Pathway to citizenship for illegal aliens", "11");
-                      select.options[12] = new Option("Support & expand free trade", "12");
-                      select.options[13] = new Option("Support American Exceptionalism", "13");
-                      select.options[14] = new Option("Expand the military", "14");
-                      select.options[15] = new Option("Make voter registration easier", "15");
-                      select.options[16] = new Option("Avoid foreign entanglements", "16");
-                      select.options[17] = new Option("Prioritize green energy", "17");
-                      select.options[18] = new Option("Marijuana is a gateway drug", "18");
-                      select.options[19] = new Option("Stimulus better than market-led recovery", "19");
-                      select.value = count.toString();
+        <script type="text/javascript" src="/static/scripts/expand.js"></script>
+        <script type="text/javascript" src="/static/scripts/addquestion.js"></script>
 
-                      var range = document.createElement('input');
-                      range.class = "range"
-                      range.name= "range" + count;
-                      range.type = 'range';
-                      range.value = '3';
-                      range.min = '1'
-                      range.max = '5'
-                      range.step = '1'
-
-                      // Good practice to do error checking
-                      if (select && range)
-                      {
-                          var row = table.insertRow(-1)
-                          var cell1 = row.insertCell(0)
-                          var cell2 = row.insertCell(1)
-                          cell1.appendChild(select);
-                          cell2.appendChild(range);
-                          // Increment the count
-                          count++;
-                      }
-
-                  }
-                  else
-                  {
-                      alert('Maximum Number of fields reached!');
-                  }
-              }
-          }
-        </script>
 
         {#http://api.jqueryui.com/autocomplete/#}
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -89,86 +13,81 @@
         <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     <body>
-        <div class="topcorner">
-            <!-- <p>Project Name: {{ name }}</p> -->
+
+        <!-- <div class="topcorner">
+            <p>Project Name: {{ name }}</p>
             <p>Creators: {{ netid }}</p>
-        </div>
+        </div> -->
+      <div id="search-area">
+        <div id="overlay">
+          <div id="center-box">
+            <form class="form-inline global-search">
+                <h1 style="font-size: 55px; font-family:Futura; color: #FFFFFF" id="title">CIVIC DUTY</h1>
+                <br><br>
+                <div class="form-group">
+                    <input id="input" type="text" name="search" class="form-control" placeholder="Type your view on an additional issue">
+                    <div class="tooltip1">?<span class="tooltiptext1">Instructions:<br><br>Select 1-20 issues along with your preferred stance.<br>Optionally input a view on an additional issue.</span> </div>
+                    <br>
+                    <p class="description_text">Additional Views</p>
+                    <br>
+                    <div id="slider-form-select">
+                      <table id="select-range-table">
+                        <tr>
+                          <td>
+                            <select class="custom-select" name="select0" required="True">
+                                <option value="" disabled="disabled">--Please choose an issue--</option>
+                                <option value="0">Abortion is a woman's unrestricted right</option>
+                                <option value="1">Legally require hiring women & minorities </option>
+                                <option value="2">Comfortable with same-sex marriage </option>
+                                <option value="3">Keep God in the public sphere </option>
+                                <option value="4">Expand ObamaCare </option>
+                                <option value="5">Privatize Social Security </option>
+                                <option value="6">Vouchers for school choice  </option>
+                                <option value="7">Fight EPA regulatory over-reach </option>
+                                <option value="8">Stricter punishment reduces crime </option>
+                                <option value="9">Absolute right to gun ownership </option>
+                                <option value="10">Higher taxes on the wealthy </option>
+                                <option value="11">Pathway to citizenship for illegal aliens </option>
+                                <option value="12">Support & expand free trade </option>
+                                <option value="13">Support American Exceptionalism </option>
+                                <option value="14">Expand the military </option>
+                                <option value="15">Make voter registration easier </option>
+                                <option value="16">Avoid foreign entanglements </option>
+                                <option value="17">Prioritize green energy </option>
+                                <option value="18">Marijuana is a gateway drug </option>
+                                <option value="19">Stimulus better than market-led recovery </option>
+                            </select>
+                          </td>
+                          <td>
+                            <div><input type="range" id="range0" value="3" min="1" max="5" step="1" name="range0" onchange="updateVal('range0','label0')" ></div>
+                            <p id="label0">Neutral</p>
+                            <!-- <div class="range-slider" name ="range0" data-slider="3" data-options="start: 1; end: 5;">
+                                <span class="range-slider-handle" role="slider" tabindex="0"></span>
+                                <span class="range-slider-active-segment"></span>
+                                <input type="hidden">
+                            </div> -->
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
 
-        <form class="form-inline global-search">
-            <h1 style="font-size: 55px; font-family:Futura; color: #4285F4">
-                C
-                <font color=#EA4335>I</font>
-                <font color=#FBBC05>V</font>
-                I
-                <font color=#34A853>C</font>
-                <font color=#34A853> </font>
-                <font color=#EA4335>D</font>
-                U
-                <font color=#34A853>T</font>
-                <font color=#EA4335>Y</font>
-            </h1>
+                    <br>
+                    <button type="button" class="btn btn-info" onclick="javascript: addQuestion();"> Add Another View </button>
+                    <p class="description_text"> Or  </p>
+                    <button type="submit" class="btn btn-info" href="#results"> Find your Candidate! </button>
 
-            <div class="tooltip1">?<span class="tooltiptext1">Instructions:<br><br>Select 1-20 issues along with your preferred stance.<br>Optionally input a view on an additional issue.</span> </div>
-
-            <br><br>
-            <div class="form-group">
-                <input id="input" type="text" name="search" class="form-control" placeholder="Type your">
-                <br>
-                <p class="description_text">Additional Views</p>
-                <br>
-                <div id="slider-form-select">
-                  <table id="select-range-table">
-                    <tr>
-                      <td>
-                        <select class="custom-select" name="select0" required="True">
-                            <option value="" disabled="disabled">--Please choose an issue--</option>
-                            <option value="0">Abortion is a woman's unrestricted right</option>
-                            <option value="1">Legally require hiring women & minorities </option>
-                            <option value="2">Comfortable with same-sex marriage </option>
-                            <option value="3">Keep God in the public sphere </option>
-                            <option value="4">Expand ObamaCare </option>
-                            <option value="5">Privatize Social Security </option>
-                            <option value="6">Vouchers for school choice  </option>
-                            <option value="7">Fight EPA regulatory over-reach </option>
-                            <option value="8">Stricter punishment reduces crime </option>
-                            <option value="9">Absolute right to gun ownership </option>
-                            <option value="10">Higher taxes on the wealthy </option>
-                            <option value="11">Pathway to citizenship for illegal aliens </option>
-                            <option value="12">Support & expand free trade </option>
-                            <option value="13">Support American Exceptionalism </option>
-                            <option value="14">Expand the military </option>
-                            <option value="15">Make voter registration easier </option>
-                            <option value="16">Avoid foreign entanglements </option>
-                            <option value="17">Prioritize green energy </option>
-                            <option value="18">Marijuana is a gateway drug </option>
-                            <option value="19">Stimulus better than market-led recovery </option>
-                        </select>
-                      </td>
-                      <td>
-                        <div><input type="range" value="3" min="1" max="5" step="1" name="range0"></div>
-                        <div class="range-slider" name ="range0" data-slider="3" data-options="start: 1; end: 5;">
-                            <span class="range-slider-handle" role="slider" tabindex="0"></span>
-                            <span class="range-slider-active-segment"></span>
-                            <input type="hidden">
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
+                    <!-- {#Autocomplete: http://api.jqueryui.com/autocomplete/#}
+    {#                <script>#}
+    {#                    $( "#input" ).autocomplete({#}
+    {#                        source: [ "Taxes", "Abortion", "Gun Control", "Global Warming", "Drug Control", "Civil Rights"]#}
+    {#                    });#}
+    {#                </script>#} -->
                 </div>
-                <br>
-                <button type="button" class="btn btn-info" onclick="javascript: addQuestion();"> Add Another View </button>
-                <p class="description_text"> Or  </p>
-                <button type="submit" class="btn btn-info"> Find your Candidate! </button>
-
-                <!-- {#Autocomplete: http://api.jqueryui.com/autocomplete/#}
-{#                <script>#}
-{#                    $( "#input" ).autocomplete({#}
-{#                        source: [ "Taxes", "Abortion", "Gun Control", "Global Warming", "Drug Control", "Civil Rights"]#}
-{#                    });#}
-{#                </script>#} -->
-            </div>
-        </form>
-        <form class="form-inline global-search">
+            </form>
+          </div>
+        </div>
+      </div>
+        <form class="form-inline global-search" id="results">
         {% if data %}
             <div class="header">
                 <h1 class="hd1">Search:</h1>
@@ -261,6 +180,27 @@
             {% endfor %}
         {% endif %}
         </form>
+        <script>
+        function updateVal(range,label){
+          var slider = document.getElementById(range);
+          var output = document.getElementById(label);
+          if(slider.value==3){
+            output.innerHTML = "Neutral"
+          }
+          else if(slider.value==1){
+            output.innerHTML = "Strongly Oppose"
+          }
+          else if(slider.value==2){
+            output.innerHTML = "Oppose"
+          }
+          else if(slider.value==5){
+            output.innerHTML = "Strongly Favor"
+          }
+          else if(slider.value==4){
+            output.innerHTML = "Favor"
+          }
+        }
+        </script>
     </body>
 
 </html>

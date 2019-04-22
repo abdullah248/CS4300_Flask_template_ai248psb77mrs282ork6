@@ -44,12 +44,14 @@ def search():
 	# while(select)
 	q = request.args
 
-	if not query:
+	if not query and count<=1 and arr[0]==0:
 		data = []
 		output_message = ''
 		stances = []
 		stanceP = []
 	else:
+		if not query:
+			query=''
 		data = getInput(arr,query)
 		stances = []
 		stanceP = []
