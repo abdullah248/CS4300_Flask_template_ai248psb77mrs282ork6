@@ -94,6 +94,9 @@ def runTwitterAnalysis(nameOfCandidate):
     api = TwitterClient()
     tweets = api.get_tweets(query = nameOfCandidate, count = 200)
 
+    if not tweets:
+        return 0, 0, 0
+
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
     neutweets = [tweet for tweet in tweets if tweet['sentiment'] == 'neutral']
