@@ -255,7 +255,7 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
         'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand_sents[sorted_x[i][0]][0],
         'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2],
-        'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':round(cand_scores[sorted_x[i][0]], 1), 'slider':firstMetricList[sorted_x[i][0]], 'wiki':secondMetricList[sorted_x[i][0]]})
+        'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':round(cand_scores[sorted_x[i][0]], 1), 'slider':round(firstMetricList[sorted_x[i][0]], 1), 'wiki':round(secondMetricList[sorted_x[i][0]], 1)})
         print(cand['name'] + ' ' + str(cand_sents[sorted_x[i][0]][3]))
     #
     # print()
