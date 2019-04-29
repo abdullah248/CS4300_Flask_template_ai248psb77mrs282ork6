@@ -230,7 +230,7 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
     for i in range(len(firstMetricList)):
         # combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
         if inputString != "":
-            cand_scores[firstMetricList[i][0]] = firstMetricList[i][1] - 15
+            cand_scores[firstMetricList[i][0]] = max(0, firstMetricList[i][1] - 15)
         else:
             cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
     if inputString != "":
