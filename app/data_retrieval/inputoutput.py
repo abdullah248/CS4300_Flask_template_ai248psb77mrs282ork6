@@ -218,22 +218,26 @@ def getInput(input, train_string):
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
     # print(sorted_x)
 
-    return createOutput(squaredDistanceList,sorted_x,data,viewDict)
+    return createOutput(squaredDistanceList,sorted_x,viewDict,train_string)
 
 
 
-def createOutput(firstMetricList,secondMetricList,data,viewDict):
+def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
     outputList = []
     combinedTupleList = []
     cand_scores = {}
     # print('here')
     for i in range(len(firstMetricList)):
         # combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
-        cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
-    k = 15
-    for j in range(3):
-        cand_scores[secondMetricList[j][0]] = min(100, k + cand_scores[secondMetricList[j][0]])
-        k -= 5
+        if inputString != "":
+            cand_scores[firstMetricList[i][0]] = firstMetricList[i][1] - 15
+        else:
+            cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
+    if inputString != "":
+        k = 15
+        for j in range(3):
+            cand_scores[secondMetricList[j][0]] = max(0, min(100, k + cand_scores[secondMetricList[j][0]]))
+            k -= 5
 
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
     # print("\nCombined tuple list is: ")
