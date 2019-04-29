@@ -83,14 +83,20 @@ def getInput(input, train_string):
     for k in data: #k is name of candidate
         data[k] = np.array(data[k])
         temp = np.copy(input)
+        numPositions = 0
+        diff = 0
         for i in range(len(temp)):
-            if temp[i] == 0:
-                temp[i] = data[k][i]
+            if temp[i] != 0:
+                numPositions += 1
+                diff += abs(temp[i] - data[k][i])
+            # if temp[i] == 0:
+            #     temp[i] = data[k][i]
         #print("Temp is now:")
         #print(temp)
-        v = temp-data[k]
+        # v = temp-data[k]
         #print(v)
-        sum = math.sqrt(np.sum(np.square(v))) #Difference between vectors calculation
+        # sum = math.sqrt(np.sum(np.square(v))) #Difference between vectors calculation
+        sum = 1 - diff/(4*numPositions)
         #print(sum)
         tupleList.append((k,sum))
 
@@ -99,8 +105,9 @@ def getInput(input, train_string):
     squaredDistanceList = []
 
     for tup in sorted_list:
-        n = math.sqrt(16*numberIssues)
-        accuracy = 100 - (abs(tup[1])/n)*100
+        # n = math.sqrt(16*numberIssues)
+        # accuracy = 100 - (abs(tup[1])/n)*100
+        accuracy = 100*tup[1]
         #print(tup[0].replace('_', ' ') + " with similarity of " + str(round(accuracy,2)) + "%")
         squaredDistanceList.append((tup[0], round(accuracy,2)))
     # print(squaredDistanceList)
@@ -211,22 +218,26 @@ def getInput(input, train_string):
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
     # print(sorted_x)
 
-    return createOutput(squaredDistanceList,sorted_x,data,viewDict)
+    return createOutput(squaredDistanceList,sorted_x,viewDict,train_string)
 
 
 
-def createOutput(firstMetricList,secondMetricList,data,viewDict):
+def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
     outputList = []
     combinedTupleList = []
     cand_scores = {}
     # print('here')
     for i in range(len(firstMetricList)):
         # combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
-        cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
-    k = 15
-    for j in range(3):
-        cand_scores[secondMetricList[j][0]] = min(100, k + cand_scores[secondMetricList[j][0]])
-        k -= 5
+        if inputString != "":
+            cand_scores[firstMetricList[i][0]] = firstMetricList[i][1] - 15
+        else:
+            cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
+    if inputString != "":
+        k = 15
+        for j in range(3):
+            cand_scores[secondMetricList[j][0]] = max(0, min(100, k + cand_scores[secondMetricList[j][0]]))
+            k -= 5
 
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
     # print("\nCombined tuple list is: ")
@@ -242,8 +253,9 @@ def createOutput(firstMetricList,secondMetricList,data,viewDict):
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
         'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand_sents[sorted_x[i][0]][0],
-        'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2], 'similarity':cand_scores[sorted_x[i][0]]})
-        print(cand['name'] + ' ' + str(cand_scores[sorted_x[i][0]]))
+        'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2],
+        'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':cand_scores[sorted_x[i][0]]})
+        print(cand['name'] + ' ' + str(cand_sents[sorted_x[i][0]][3]))
     #
     # print()
     # print()
