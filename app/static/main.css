@@ -94,7 +94,7 @@ color: #4285F4;
 }
 
 .header{
-width: 990px;
+width: 1017.5px;
 margin: 0;
 text-align: left;
 }
@@ -151,14 +151,16 @@ color:#ce8483;
 
 #loading-box{
 position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
 height:100%;
 width:100%;
-background-color:#c0d1fc;
-padding-left: 20px;
-padding-right: 20px;
+background-color:#3d6098;
+}
+#loading-inner-box{
+position:absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -55%);
+color:#ffffff;
 }
 
 #loadGif {
@@ -273,7 +275,7 @@ display: table-cell;
 position:relative;
 background-color: #f2f2f2;
 width:160px;
-height:210px;
+height:230px;
 margin-bottom:10px;
 border-radius: 10px;
 }
@@ -558,7 +560,6 @@ font-family: arial, sans-serif;
 font-size: 11.5px;
 border-collapse: collapse;
 width: 100%;
-margin-bottom: 29px;
 }
 
 .views-table tr {
@@ -593,7 +594,6 @@ color:#34A853;
 color:#ffffff;
 }
 
-
 .summary{
 top: 0px;
 left: 0px;
@@ -602,6 +602,17 @@ padding-bottom: 2px;
 width:inherit;
 border-width: 1px;
 border-bottom-style: dashed;
+border-color: #000000;
+}
+
+.twitter{
+left: 0px;
+padding-top: 2px;
+padding-bottom: 2px;
+margin-bottom: 29px;
+width:inherit;
+border-width: 1px;
+border-top-style: dashed;
 border-color: #000000;
 }
 
@@ -747,4 +758,8 @@ margin-bottom:0px;
   font-family: sans-serif;
   font-size: 0.5em;
   text-anchor: middle;
+}
+
+#graphs-chart td{
+width:50px;
 }
