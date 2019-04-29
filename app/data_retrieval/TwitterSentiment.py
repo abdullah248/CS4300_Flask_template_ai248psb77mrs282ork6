@@ -63,17 +63,18 @@ class TwitterClient(object):
 
         try:
             # call twitter api to fetch tweets
-            fetched_tweets = self.api.search(q = query, count = count)
-
+            fetched_tweets = self.api.search(q = query, count = count, tweet_mode = 'extended' )
+            # print(fetched_tweets)
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
 
                 # saving text of tweet
-                parsed_tweet['text'] = tweet.text
+                parsed_tweet['text'] = tweet.full_text
+                # print(tweet.full_text)
                 # saving sentiment of tweet
-                parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text)
+                parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.full_text)
 
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
