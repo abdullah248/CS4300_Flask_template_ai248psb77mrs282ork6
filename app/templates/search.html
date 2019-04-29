@@ -95,7 +95,10 @@
             </form>
           </div>
           <div id="loading-box" style="display:none;">
-              <img id="loadGif" src="/static/assets/load.gif" alt="Loading...">
+              <figure>
+                  <img id="loadGif" src="/static/assets/load.gif" alt="Loading...">
+                  <figcaption>Loading...</figcaption>
+              </figure>
           </div>
         </div>
       </div>
@@ -268,9 +271,12 @@
             var myVar;
 
             function loadScreen() {
-                document.getElementById("loading-box").style.display = '';
-                {#document.getElementById("loadGif").style.display = '';#}
-                document.getElementById("loadGif").innerHTML = '<img src="/static/assets/load.gif">/';
+                document.getElementById("loading-box").style.display = "block";
+                document.getElementById("loadGif").style.display = "block";
+                {#document.getElementById("searchPage").submit();#}
+                {#document.getElementById("loading-box").innerHTML = '<img id="loadGif" src="/static/assets/load.gif">/';#}
+                {#$("#loading-box").append("<img src='/static/assets/load.gif' alt='Loading...' id='loadGif' />");#}
+                {#$("#loadGif").css("display", "block");#}
                 {#pb.style.display = '';#}
                 myVar = setTimeout(stopLoad, 3000);
             }
