@@ -95,10 +95,12 @@
             </form>
           </div>
           <div id="loading-box" style="display:none;">
-              <figure>
-                  <img id="loadGif" src="/static/assets/load.gif" alt="Loading...">
-                  <figcaption>Loading...</figcaption>
-              </figure>
+              <div id="loading-inner-box">
+                  <figure>
+                      <img id="loadGif" src="/static/assets/load.gif" alt="Loading...">
+                      <figcaption >Loading...</figcaption>
+                  </figure>
+              </div>
           </div>
         </div>
       </div>
@@ -135,61 +137,98 @@
                         <input id={{"button"+d.idx|string}} type="button" value="+" class="arrow w3-button w3-xlarge w3-circle w3-teal" onclick="expand({{d.idx}},this)" style="background-color:#009688">
                         <p class={{d.party}}>{{d.party}}</p>
                         <div class="flex-wrapper">
-                          <div class="sim_chart">
-                            <p class="pie-title">Similarity</p>
-                            <svg viewBox="0 0 36 36" class="circular-chart orange">
-                              <path class="circle-bg"
-                                d="M18 2.0845
-                                  a 15.9155 15.9155 0 0 1 0 31.831
-                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                              />
-                              <path class="circle"
-                                stroke-dasharray="{{d.similarity}}, 100"
-                                d="M18 2.0845
-                                  a 15.9155 15.9155 0 0 1 0 31.831
-                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                              />
-                              <text x="18" y="20.35" class="percentage">{{d.similarity}}%</text>
-                            </svg>
-                          </div>
-                          <div class="sent_chart">
-                            <p class = "pie-title">Sentiment</p>
-                            <svg viewBox="0 0 36 36" class="circular-chart orange">
-                              <path class="circle-bg"
-                                d="M18 2.0845
-                                  a 15.9155 15.9155 0 0 1 0 31.831
-                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                              />
-                              <path class="cN"
-                                stroke-dasharray="{{d.neutral_sentiment - 4}},100"
-                                d="M18 2.0845
-                                  a 15.9155 15.9155 0 0 1 0 31.831
-                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                              />
-                              <path class="cP"
-                                stroke-dasharray="1,{{d.neutral_sentiment}},{{d.positive_sentiment - 4}},100"
-                                stroke-dashoffset="1"
-                                d="M18 2.0845
-                                  a 15.9155 15.9155 0 0 1 0 31.831
-                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                              />
-                              <path class="cNeg"
-                                stroke-dasharray="1,{{d.neutral_sentiment + d.positive_sentiment}},{{d.negative_sentiment - 4}},100"
-                                stroke-dashoffset="1"
-                                d="M18 2.0845
-                                  a 15.9155 15.9155 0 0 1 0 31.831
-                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                              />
-                              <text x="18" y="20.35" class="percentage"></text>
-                            </svg>
-                          </div>
-                        </div>
+
+                        <table id=graphs-chart>
+                          <tr>
+                            <td>
+                              <p class="pie-title">Views Similarity</p>
+                            </td>
+                            <td>
+                              <p class="pie-title">Wikipedia Similarity</p>
+                            </td>
+                            <td>
+                              <p class="pie-title">Twitter Sentiment</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <svg viewBox="0 0 36 36" class="circular-chart orange">
+                                <path class="circle-bg"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <path class="circle"
+                                  stroke-dasharray="{{d.similarity}}, 100"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <text x="18" y="20.35" class="percentage">{{d.similarity}}%</text>
+                              </svg>
+
+                            </td>
+                            <td>
+                              <svg viewBox="0 0 36 36" class="circular-chart orange">
+                                <path class="circle-bg"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <path class="circle"
+                                  stroke-dasharray="{{d.similarity}}, 100"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <text x="18" y="20.35" class="percentage">{{d.similarity}}%</text>
+                              </svg>
+                            </td>
+                            <td>
+                              <svg viewBox="0 0 36 36" class="circular-chart orange">
+                                <path class="circle-bg"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <path class="cN"
+                                  stroke-dasharray="{{d.neutral_sentiment - 4}},100"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <path class="cP"
+                                  stroke-dasharray="1,{{d.neutral_sentiment}},{{d.positive_sentiment - 4}},100"
+                                  stroke-dashoffset="1"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <path class="cNeg"
+                                  stroke-dasharray="1,{{d.neutral_sentiment + d.positive_sentiment}},{{d.negative_sentiment - 4}},100"
+                                  stroke-dashoffset="1"
+                                  d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                />
+                                <text x="18" y="20.35" class="percentage"></text>
+                              </svg>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+
                     </div>
                     <div id={{d.idx}} class="extra_info" style="display: none;">
                       <div class="summary">
                         <p class="summary_header">Wikipedia Summary</p>
                         <br>
                         <p class="summary_text">{{d.views.summary}}</p>
+                      </div>
+                      <div class="summary">
+                        <p class="summary_header">Wikipedia Query Match</p>
+                        <br>
+                        <p class="summary_text">{{d.views.wikipedia}}</p>
                       </div>
                       <br>
                       <table class="views-table" style="width:100%; z-index:1;">
@@ -233,7 +272,11 @@
                         {% endfor %}
                         </tr>
                       </table>
-                      <br>
+                      <div class="twitter">
+                        <p class="summary_header">Tweet sentiment example</p>
+                        <br>
+                        <p class="summary_text">{{d.tweet}}</p>
+                      </div>
                       <div class="links">
                         <a href={{d.views.wikipedia}} class="wiki" target="_blank">Wikipedia Article: {{d.views.wikipedia}}</a>
                         <br>
@@ -284,7 +327,7 @@
             function showPage() {
                 $('html, body').animate({
                     scrollTop: $("#resultPage").offset().top
-                }, 2000);
+                }, 500);
             }
         </script>
     </body>
