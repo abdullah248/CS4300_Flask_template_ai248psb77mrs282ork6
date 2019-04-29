@@ -211,7 +211,7 @@ def getInput(input, train_string):
         # mat = mat * eds
         # print(mat.shape)
         diff = abs(query_sentiment - sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
-        cand_scores[candidate] = mat.max() - diff
+        cand_scores[candidate] = max(0, mat.max() - diff)
         # print (candidate, sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
 
     # print(cand_scores)
@@ -255,7 +255,7 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
         'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand_sents[sorted_x[i][0]][0],
         'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2],
-        'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':round(cand_scores[sorted_x[i][0]], 1), 'slider':round(firstMetricList[sorted_x[i][0]], 1), 'wiki':round(secondMetricList[sorted_x[i][0]], 1)})
+        'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':round(cand_scores[sorted_x[i][0]], 1), 'slider':round(firstMetricList[sorted_x[i][0]], 1), 'wiki':round(secondMetricList[sorted_x[i][0]], 1)*100})
         print(cand['name'] + ' ' + str(cand_sents[sorted_x[i][0]][3]))
     #
     # print()
