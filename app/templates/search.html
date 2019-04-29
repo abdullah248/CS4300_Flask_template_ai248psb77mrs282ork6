@@ -24,7 +24,7 @@
       <div id="search-area">
         <div id="overlay">
           <div id="center-box">
-            <form id="searchPage" class="form-inline global-search">
+            <form id="searchPage" class="form-inline global-search" onsubmit="loadScreen()">
                 <h1 style="font-size: 55px; font-family:Futura; color: #FFFFFF" id="title">CIVIC DUTY</h1>
                 <br><br>
                 <div class="form-group">
@@ -35,7 +35,7 @@
                             <div style="padding: 2rem">
                             <div class="customSelect">
                             <select name="select0" required="True">
-                                <option value="" disabled="disabled">--Please choose an issue--</option>
+                                <option selected=select value="" disabled="disabled">--Please choose an issue--</option>
                                 <option value="0">Abortion is a woman's unrestricted right</option>
                                 <option value="1">Legally require hiring women & minorities</option>
                                 <option value="2">Comfortable with same-sex marriage </option>
@@ -84,7 +84,7 @@
                     <br>
                     <button type="button" class="btn btn-info" onclick="javascript: addQuestion();"> Add Another View</button>
                     <p class="description_text"> Or  </p>
-                    <button id="sButton" type="submit" class="btn btn-info" onclick="loadScreen()"> Find your Candidate!</button>
+                    <button id="sButton" type="submit" class="btn btn-info"> Find your Candidate!</button>
                     <!-- {#Autocomplete: http://api.jqueryui.com/autocomplete/#}
     {#                <script>#}
     {#                    $( "#input" ).autocomplete({#}
@@ -95,7 +95,10 @@
             </form>
           </div>
           <div id="loading-box" style="display:none;">
-              <img id="loadGif" src="/static/assets/load.gif" alt="Loading...">
+              <figure>
+                  <img id="loadGif" src="/static/assets/load.gif" alt="Loading...">
+                  <figcaption>Loading...</figcaption>
+              </figure>
           </div>
         </div>
       </div>
@@ -268,11 +271,9 @@
             var myVar;
 
             function loadScreen() {
-                document.getElementById("loading-box").style.display = '';
-                {#document.getElementById("loadGif").style.display = '';#}
-                document.getElementById("loadGif").innerHTML = '<img src="/static/assets/load.gif">/';
-                {#pb.style.display = '';#}
-                myVar = setTimeout(stopLoad, 3000);
+                document.getElementById("loading-box").style.display = "block";
+                document.getElementById("loadGif").style.display = "block";
+                myVar = setTimeout(stopLoad, 4000);
             }
 
             function stopLoad() {
