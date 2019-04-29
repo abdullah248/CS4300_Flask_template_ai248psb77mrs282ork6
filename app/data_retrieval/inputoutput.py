@@ -180,39 +180,9 @@ def getInput(input, train_string):
         train_set = [original_query] + sentences
         tfidf_matrix_train = tfidf_vectorizer.fit_transform(train_set)
         mat = cosine_similarity(tfidf_matrix_train[0], tfidf_matrix_train[1:])
-        # print(mat.shape)
-        # i = 0
-        # for sentence in sentences:
-        #     s1 = sia.polarity_scores(sentence)['compound']
-        #     # diff = abs(query_sentiment - s1)
-        #     # mat[0][i] = mat[0][i] - diff
-        #     i += 1
-
-
-
-        # eds = []
-        # for sentence in sentences:
-        #     ed = editdistance.eval(train_string, sentence) + 1
-        #     booleansearch = True
-        #     count = 0
-        #     for word in train_words:
-        #         if word not in sentence:
-        #             booleansearch = False
-        #             break
-        #     # if booleansearch:
-        #     #     eds.append(10/ed)
-        #     # elif count == 0:
-        #     #     eds.append(.1/ed)
-        #     # else:
-        #     #     eds.append(1/ed)
-        #     eds.append(1/ed)
-        # eds = np.array(eds)
-        # # print(eds)
-        # mat = mat * eds
-        # print(mat.shape)
         diff = abs(query_sentiment - sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
         cand_scores[candidate] = max(0, mat.max() - diff)
-        # print (candidate, sia.polarity_scores(sentences[mat[0].argmax()])['compound'])
+        # print (candidate + ' ' + str(mat.max()))
 
     # print(cand_scores)
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
@@ -229,15 +199,17 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
     # print('here')
     for i in range(len(firstMetricList)):
         # combinedTupleList.append((firstMetricList[i][0],firstMetricList[i][1]))
-        if inputString != "":
-            cand_scores[firstMetricList[i][0]] = max(0, firstMetricList[i][1] - 15)
-        else:
-            cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
+        # if inputString != "":
+        #     cand_scores[firstMetricList[i][0]] = max(0, firstMetricList[i][1] - 15)
+        # else:
+        cand_scores[firstMetricList[i][0]] = firstMetricList[i][1]
     if inputString != "":
-        k = 15
-        for j in range(3):
-            cand_scores[secondMetricList[j][0]] = max(0, min(100, k + cand_scores[secondMetricList[j][0]]))
-            k -= 5
+        for j in range(len(secondMetricList)):
+            cand_scores[secondMetricList[j][0]] += secondMetricList[j][1]
+    #     k = 15
+    #     for j in range(3):
+    #         cand_scores[secondMetricList[j][0]] = max(0, min(100, k + cand_scores[secondMetricList[j][0]]))
+    #         k -= 5
 
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
     # print("\nCombined tuple list is: ")
