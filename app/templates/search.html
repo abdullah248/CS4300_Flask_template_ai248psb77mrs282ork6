@@ -311,15 +311,11 @@
             function loadScreen() {
                 document.getElementById("loading-box").style.display = "block";
                 document.getElementById("loadGif").style.display = "block";
-                myVar = setTimeout(stopLoad, 4000);
-            }
-
-            function stopLoad() {
-                document.getElementById("loading-box").style.display = "none";
-                document.getElementById("loadGif").style.display = "none";
             }
 
             function showPage() {
+                document.getElementById("loading-box").style.display = "none";
+                document.getElementById("loadGif").style.display = "none";
                 $('html, body').animate({
                     scrollTop: $("#resultPage").offset().top
                 }, 500);
