@@ -167,7 +167,7 @@ padding-right: 20px;
   top: 50%;
   /*transform: translate(-50%, -50%);*/
   z-index: 4;
-  width: 400px;
+  width: 500px;
   /*background: url('/static/assets/load.gif');*/
   /*background-size: cover;*/
   /*margin: -75px 0 0 -75px;*/
@@ -176,7 +176,7 @@ padding-right: 20px;
 
 figure {
 display: inline-block;
-border: 1px dotted gray;
+/*border: 1px dotted gray;*/
 margin: 20px; /* adjust as needed */
 }
 
@@ -184,7 +184,7 @@ figure img {
 vertical-align: top;
 }
 figure figcaption {
-border: 1px dotted blue;
+/*border: 1px dotted blue;*/
 text-align: center;
 }
 

@@ -273,12 +273,7 @@
             function loadScreen() {
                 document.getElementById("loading-box").style.display = "block";
                 document.getElementById("loadGif").style.display = "block";
-                {#document.getElementById("searchPage").submit();#}
-                {#document.getElementById("loading-box").innerHTML = '<img id="loadGif" src="/static/assets/load.gif">/';#}
-                {#$("#loading-box").append("<img src='/static/assets/load.gif' alt='Loading...' id='loadGif' />");#}
-                {#$("#loadGif").css("display", "block");#}
-                {#pb.style.display = '';#}
-                myVar = setTimeout(stopLoad, 3000);
+                myVar = setTimeout(stopLoad, 4000);
             }
 
             function stopLoad() {
