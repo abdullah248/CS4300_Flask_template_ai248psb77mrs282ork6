@@ -101,12 +101,23 @@ def runTwitterAnalysis(nameOfCandidate):
     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
     neutweets = [tweet for tweet in tweets if tweet['sentiment'] == 'neutral']
 
+
+
     percentPos = 100*len(ptweets)/len(tweets)
     percentNeg = 100*len(ntweets)/len(tweets)
     percentNeu = 100*len(neutweets)/len(tweets)
+
+    if percentPos >= percentNeg and percentPos >= percentNeu:
+        twee = ptweets[0]['text']
+
+    elif percentNeu >= percentNeg and percentNeu >= percentPos:
+        twee = ntweets[0]['text']
+
+    elif percentNeg >= percentPos and percentNeg >= percentNeu:
+        twee = neutweets[0]['text']
     # percentNet = 100*(len(tweets) - len(ntweets) - len(ptweets))/len(tweets)
 
-    return round(percentPos,2), round(percentNeg,2), round(percentNeu,2)
+    return round(percentPos,2), round(percentNeg,2), round(percentNeu,2), twee
 
 def main():
     # creating object of TwitterClient Class

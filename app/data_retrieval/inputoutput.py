@@ -253,8 +253,9 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
         outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
         'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
         'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand_sents[sorted_x[i][0]][0],
-        'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2], 'similarity':cand_scores[sorted_x[i][0]]})
-        print(cand['name'] + ' ' + str(cand_scores[sorted_x[i][0]]))
+        'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2],
+        'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':cand_scores[sorted_x[i][0]]})
+        print(cand['name'] + ' ' + str(cand_sents[sorted_x[i][0]][3]))
     #
     # print()
     # print()
