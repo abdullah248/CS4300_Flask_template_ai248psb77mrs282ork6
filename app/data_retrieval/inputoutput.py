@@ -83,14 +83,20 @@ def getInput(input, train_string):
     for k in data: #k is name of candidate
         data[k] = np.array(data[k])
         temp = np.copy(input)
+        numPositions = 0
+        diff = 0
         for i in range(len(temp)):
-            if temp[i] == 0:
-                temp[i] = data[k][i]
+            if temp[i] != 0:
+                numPositions += 1
+                diff += abs(temp[i] - data[k][i])
+            # if temp[i] == 0:
+            #     temp[i] = data[k][i]
         #print("Temp is now:")
         #print(temp)
-        v = temp-data[k]
+        # v = temp-data[k]
         #print(v)
-        sum = math.sqrt(np.sum(np.square(v))) #Difference between vectors calculation
+        # sum = math.sqrt(np.sum(np.square(v))) #Difference between vectors calculation
+        sum = 1 - diff/(4*numPositions)
         #print(sum)
         tupleList.append((k,sum))
 
@@ -99,8 +105,9 @@ def getInput(input, train_string):
     squaredDistanceList = []
 
     for tup in sorted_list:
-        n = math.sqrt(16*numberIssues)
-        accuracy = 100 - (abs(tup[1])/n)*100
+        # n = math.sqrt(16*numberIssues)
+        # accuracy = 100 - (abs(tup[1])/n)*100
+        accuracy = 100*tup[1]
         #print(tup[0].replace('_', ' ') + " with similarity of " + str(round(accuracy,2)) + "%")
         squaredDistanceList.append((tup[0], round(accuracy,2)))
     # print(squaredDistanceList)
