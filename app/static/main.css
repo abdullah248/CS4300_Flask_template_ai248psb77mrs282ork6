@@ -760,6 +760,12 @@ margin-bottom:0px;
   text-anchor: middle;
 }
 
+#graphs-chart{
+text-align: center;
+margin: auto;
+width: auto;
+}
+
 #graphs-chart td{
-width:50px;
+width: 50px;
 }
