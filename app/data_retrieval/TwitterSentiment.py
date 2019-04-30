@@ -1,6 +1,9 @@
 import re
 import tweepy
 from tweepy import OAuthHandler
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
 
 # Followed tutorial from
@@ -46,13 +49,16 @@ class TwitterClient(object):
         # create TextBlob object of passed tweet text
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
-        #return analysis.sentiment.polarity
-        if analysis.sentiment.polarity > 0:
-            return 'positive'
-        elif analysis.sentiment.polarity == 0:
-            return 'neutral'
-        else:
-            return 'negative'
+        return analysis.sentiment.polarity
+        # if analysis.sentiment.polarity > 0:
+        #     return 'positive'
+        # elif analysis.sentiment.polarity == 0:
+        #     return 'neutral'
+        # else:
+        #     return 'negative'
+        # sia = SentimentIntensityAnalyzer()
+        # analysis = sia.polarity_scores(tweet)['compound']
+        # return analysis
 
     def get_tweets(self, query, count = 10):
         '''
@@ -60,10 +66,11 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         tweets = []
+        ps = PorterStemmer()
 
         try:
             # call twitter api to fetch tweets
-            fetched_tweets = self.api.search(q = query, count = count, tweet_mode = 'extended' )
+            fetched_tweets = self.api.search(q=query, count=count, tweet_mode='extended')
             # print(fetched_tweets)
             # parsing tweets one by one
             for tweet in fetched_tweets:
@@ -74,7 +81,13 @@ class TwitterClient(object):
                 parsed_tweet['text'] = tweet.full_text
                 # print(tweet.full_text)
                 # saving sentiment of tweet
-                parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.full_text)
+                nS = []
+                words = word_tokenize(self.clean_tweet(tweet.full_text))
+                for w in words:
+                    nS.append(ps.stem(w))
+                nSS = (" ").join(nS)
+
+                parsed_tweet['sentiment'] = self.get_tweet_sentiment(nSS)
 
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
@@ -98,18 +111,23 @@ def runTwitterAnalysis(nameOfCandidate):
     if not tweets:
         return 0, 0, 0
 
-    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
-    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
-    neutweets = [tweet for tweet in tweets if tweet['sentiment'] == 'neutral']
+    # ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
+    # ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
+    # neutweets = [tweet for tweet in tweets if tweet['sentiment'] == 'neutral']
 
+    ptweets = [tweet for tweet in tweets if tweet['sentiment'] > 0]
+    ntweets = [tweet for tweet in tweets if tweet['sentiment'] < 0]
+    neutweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
 
+    ptweets = sorted(ptweets, key=lambda tup: tup['sentiment'])
+    ntweets = sorted(ntweets, key=lambda tup: tup['sentiment'])
 
     percentPos = 100*len(ptweets)/len(tweets)
     percentNeg = 100*len(ntweets)/len(tweets)
     percentNeu = 100*len(neutweets)/len(tweets)
 
     if percentPos >= percentNeg and percentPos >= percentNeu:
-        twee = ptweets[0]['text']
+        twee = ptweets[-1]['text']
 
     elif percentNeu >= percentNeg and percentNeu >= percentPos:
         twee = ntweets[0]['text']
