@@ -212,24 +212,29 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
     #         k -= 5
 
     sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
+
+
+    with open('app/data_retrieval/candidates.pickle', 'rb') as f:
+         cand_sents = pickle.load(f)
+
+    for i in range(len(sorted_x)):
+        cand_scores[sorted_x[i][0]] += 2*cand_sents[sorted_x[i][0]][0]/1000 + cand_sents[sorted_x[i][0]][2]/1000
     # print("\nCombined tuple list is: ")
     # print(combinedTupleList)
 
-    with open('app/data_retrieval/candidates.pickle', 'rb') as f:
-        cand_sents = pickle.load(f)
+    sorted_x = sorted(cand_scores.items(), key=lambda x: x[1], reverse=True)
 
     firstMetricList = dict((x, y) for x, y in firstMetricList)
     secondMetricList = dict((x, y) for x, y in secondMetricList)
     for i in range(len(sorted_x)):
-        cand = bigDict[sorted_x[i][0]]
-        candSummary = candidate_to_summary[sorted_x[i][0]]
-        outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
-        'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
-        'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand_sents[sorted_x[i][0]][0],
-        'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2],
-        'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':round(cand_scores[sorted_x[i][0]], 1), 'slider':round(firstMetricList[sorted_x[i][0]], 1), 'wiki':round(secondMetricList[sorted_x[i][0]]*100, 1)})
-        print(cand['name'] + ' ' + str(cand_sents[sorted_x[i][0]][3]))
-    #
+        if firstMetricList[sorted_x[i][0]] >= 50:
+            cand = bigDict[sorted_x[i][0]]
+            candSummary = candidate_to_summary[sorted_x[i][0]]
+            outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
+            'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
+            'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand_sents[sorted_x[i][0]][0],
+            'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2],
+            'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':round(cand_scores[sorted_x[i][0]], 1), 'slider':round(firstMetricList[sorted_x[i][0]], 1), 'wiki':round(secondMetricList[sorted_x[i][0]]*100, 1)})    #
     # print()
     # print()
     # print()
