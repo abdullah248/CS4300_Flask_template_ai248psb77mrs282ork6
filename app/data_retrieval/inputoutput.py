@@ -218,7 +218,7 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
          cand_sents = pickle.load(f)
 
     for i in range(len(sorted_x)):
-        cand_scores[sorted_x[i][0]] += 2*cand_sents[sorted_x[i][0]][0]/1000 + cand_sents[sorted_x[i][0]][2]/1000
+        cand_scores[sorted_x[i][0]] += cand_sents[sorted_x[i][0]][0]/1000 + cand_sents[sorted_x[i][0]][2]/10000
     # print("\nCombined tuple list is: ")
     # print(combinedTupleList)
 
