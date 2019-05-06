@@ -232,8 +232,8 @@ def createOutput(firstMetricList,secondMetricList,viewDict,inputString):
             candSummary = candidate_to_summary[sorted_x[i][0]]
             outputList.append({'idx':i,'pic':cand['pic'],'name':cand['name'],
             'party':cand['party'],'views':{'wikipedia':cand['wikipedia'],'ontheissues':cand['ontheissues'],
-            'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':cand_sents[sorted_x[i][0]][0],
-            'negative_sentiment':cand_sents[sorted_x[i][0]][1], 'neutral_sentiment':cand_sents[sorted_x[i][0]][2],
+            'views':viewDict[sorted_x[i][0]],'summary':candSummary}, 'positive_sentiment':max(4,cand_sents[sorted_x[i][0]][0]),
+            'negative_sentiment':max(4,cand_sents[sorted_x[i][0]][1]), 'neutral_sentiment':max(4,cand_sents[sorted_x[i][0]][2]),
             'tweet':cand_sents[sorted_x[i][0]][3], 'similarity':round(cand_scores[sorted_x[i][0]], 1), 'slider':round(firstMetricList[sorted_x[i][0]], 1), 'wiki':round(secondMetricList[sorted_x[i][0]]*100, 1)})    #
     # print()
     # print()
